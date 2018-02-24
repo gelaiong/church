@@ -152,28 +152,18 @@ function displayAdmins(){
 		
 		echo "<form method='POST' action='admins.php?page=1'>
 		       <tr>
-					<td>$name</td>
-					<td>$contact</td>
-					<td>$church</td>
-					<td>$address</td>
+		       		<td>$aid</td>
+					<td class='three wide'>$name</td>
+					<td class='two wide'>$contact</td>
+					<td class='three wide'>$church</td>
+					<td class='three wide'>$address</td>
 					<td>
-						<button type='button' class='ui vertical animated blue button' tabindex='0' onclick='admin_info($aid);'>
-							<div class='visible content' >
-								<i class='pencil icon'></i>
-							</div>
-							<div class='hidden content'>Edit</div>
-						</button>
-						<button  class='ui vertical animated red button' tabindex='0' name='delete'>
-							<div class='visible content'>
-								<i class='trash icon'></i>
-							</div>
-							<div class='hidden content'>Remove</div>	
-						</button>	
+						<button class='ui vk button' onclick='admin_info($aid);'><i class='pencil alternate icon'></i>Update</button>
+						<button class='ui google plus button' name='delete'><i class='ban icon'></i>Remove</button>
+						<input type='hidden' name = 'id' value = '$id' />
 					</td>
-					<input type='hidden' name = 'id' value = '$id' />
-					
 				</tr>
-				</form>";
+			  </form>";
     }
  }
 
@@ -255,27 +245,19 @@ function displayChurches()
 		$address = $row_query['church_address'];
 		$cid = $row_query['church_id'];
 		
-		echo " <form method='POST' action='churches.php?page=1'>
-		      <tr>
-					<td>$church</td>
-					<td>$address</td>
-					<td style='width:250px;'>
-						<button type='button' class='ui vertical animated button' tabindex='0' onclick='open_info(".$cid.");'>
-							<div class='visible content' >
-								<i class='unhide icon'></i>
-							</div>
-							<div class='hidden content'>View</div>
-						</button>
-						<button  class='ui vertical animated red button' tabindex='0' name='del'>
-							<div class='visible content'>
-								<i class='trash icon'></i>
-							</div>
-							<div class='hidden content'>Remove</div>
-						</button>
-						
-					</td>
-					<input type='hidden' name='cid' value='$cid' />
-				</tr> 
+		echo " 	<form method='POST' action='churches.php?page=1'>
+					<tr>
+						<td>$cid</td>
+						<td class='three wide'>$church</td>
+						<td class='three wide'>$address</td>
+						<td class='three wide'>--------</td>
+						<td class='two wide'>--------</td>
+						<td class='seven wide'>
+							<button class='ui vk button'><i class='pencil alternate icon'></i>Update</button>
+							<button class='ui google plus button' name='del'><i class='ban icon'></i>Remove</button>
+						</td>
+						<input type='hidden' name='cid' value='$cid'/>
+					</tr>
 				</form>";
     }
  }
@@ -443,11 +425,10 @@ function displaySchedule()
 
 		echo '
 			<tr>
-				<td>'.$stime.'</td>
-				<td>'.$day.'</td>
 				<td>'.$event.'</td>
 				<td>'.$church.'</td>
-				<td>'.$address.'</td>
+				<td>'.$day.'</td>
+				<td>'.$stime.'</td>
 			</tr> ';
     }
 }

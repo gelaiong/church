@@ -21,8 +21,8 @@
 
 #slogo{   
 	background-color: #000000; 
-	height: 41px;
-	padding-top: 8px;
+	height: 42px;
+	padding-top: 10px;
 }
 
 .img{
@@ -80,3 +80,5 @@ footer{
 #searchbar{
 	margin-left: 270px;
 }
+
+*{font-family: sans-serif;}

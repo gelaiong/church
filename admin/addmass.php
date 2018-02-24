@@ -1,8 +1,6 @@
 <?php 
 	include("functions_ad.php");
 	sessionAdmin(); 
-	
-
 ?>
 
 <!DOCTYPE html>
@@ -14,88 +12,86 @@
 	<script src="../jquery/jquery.min.js"></script>
 	<script src="../semantic/semantic.min.js"></script>
 </head>
-<body>
-<div class="ui top attached borderless menu">
-	<div class="right menu">
-		<div class="ui dropdown item">
-			Settings
-			<i class="dropdown icon"></i>
-			<div class="menu">
-				<a class="item" href="manageaccount.php"><i class="user icon"></i>Manage account</a>
-				<a class="item" href="../logout.php"><i class="sign out icon"></i>Log out</a>
-			</div>
+<body style="background: #ededed;">
+<div class="ui basic bottom attached segment">
+	<div class="ui large left vertical visible sidebar inverted borderless small menu" style="box-shadow: none !important;">
+		<div class="item" id="slogo">
+			<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
 		</div>
+		<div class="item">
+			<center><h4>ADMINISTRATOR</h4></center>
+		</div>
+		<a href="home.php"><div class="item"><i class="home left icon"></i>Home</div></a>
+		<a href="schedules.php?page=1" class="active item" style="background: #ededed; color: black !important;"><i class="calendar icon"></i>Schedules</a>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<?php 
+		    $id = $_SESSION['account_id'];
+			echo '
+			<a href="manageaccount.php?aid='.$id.'" class="item"><i class="pencil alternative icon"></i>Edit Profile</a>
+			<a href="../logout.php" class="item"><i class="sign out icon"></i>Logout</a>';
+		?>
 	</div>
-</div>
-<div class="ui left visible vertical sidebar menu">
-	<div class="item" id="slogo">
-		<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
-	</div>
-	<a class="item" href="index.php"><i class="plus icon"></i>Church Info</a>
-	<a class="active item" href="schedules.php?page=1"><i class="calendar icon"></i>Schedules</a>
-</div>
-<div class="ui pusher">
-	<div class="content" id="content">
-		<div class="ui stackable two column grid">
-			<div class="column">
-				<h1 class="ui header">
-					<i class="circular plus icon"></i>
-					<div class="content">
-						Schedules
-						<div class="sub header">Add new schedule</div>
-					</div>
-				</h1>
-				<div class="ui breadcrumb">
-					<a class="section" href="schedules.php?page=1">Schedules</a>
-					<i class="right chevron icon divider"></i>
-					<div class="active section">Add mass schedule</div>
-				</div> <!-- ui breadcrumb -->
-			</div>
-			<div class="middle aligned column">
-			</div>
+	<div class="pusher" style="max-width: 79% !important;">
+		<div class="ui breadcrumb" style="background: white; padding-top: 16px; padding-bottom: 16px; padding-left: 20px; margin-left: -22px; margin-top:-20px; padding-right: 83.5%; margin-right: -25px;">
+			<div class="divider"> <i class="right chevron icon"></i> </div>
+			<a href="home.php" class="section">Home</a>
+			<div class="divider"> / </div>
+			<div class="active section">Schedule Viewer</div>
 		</div>
-		<div class="ui attached message">
-			<p>All fields are required.</p>
-		</div>
-		<form class="ui form" method="POST" action="schedules.php?page=1">
-			<div class="ui attached fluid basic blue segment">
-				<div class="seven fields">
-					<div class="field">
-						<label>SUNDAY</label>
-						<?php echo timemass("sun"); ?>
-					</div>
-					<div class="field">
-						<label>MONDAY</label>
-						<?php echo timemass("mon"); ?>
-					</div>
-					<div class="field">
-						<label>TUESDAY</label>
-						<?php echo timemass("tue"); ?>
-					</div>
-					<div class="field">
-						<label>WEDNESDAY</label>
-						<?php echo timemass("wed"); ?>
-					</div>
-					<div class="field">
-						<label>THURSDAY</label>
-						<?php echo timemass("thu"); ?>
-					</div>
-					<div class="field">
-						<label>FRIDAY</label>
-						<?php echo timemass("fri"); ?>
-					</div>
-					<div class="field">
-						<label>SATURDAY</label>
-						<?php echo timemass("sat"); ?>
+		<div class="ui hidden divider"></div>
+		<div class="container">
+			<div class="ui segments">
+				<div class="ui segment">
+					<h3 class="ui header">ADD MASS SCHEDULE</h3>
+				</div>
+				<div class="ui padded segment">
+					<div class="ui center aligned grid">
+						<div class="column"></div>
+						<div class="fourteen wide left aligned middle aligned column">
+							<form class="ui form" method="POST"  action="schedules.php?page=1">
+								<div class="seven fields">
+									<div class="field">
+										<label>SUNDAY</label>
+										<?php echo timemass("sun"); ?>
+									</div>
+									<div class="field">
+										<label>MONDAY</label>
+										<?php echo timemass("mon"); ?>
+									</div>
+									<div class="field">
+										<label>TUESDAY</label>
+										<?php echo timemass("tue"); ?>
+									</div>
+									<div class="field">
+										<label>WEDNESDAY</label>
+										<?php echo timemass("wed"); ?>
+									</div>
+									<div class="field">
+										<label>THURSDAY</label>
+										<?php echo timemass("thu"); ?>
+									</div>
+									<div class="field">
+										<label>FRIDAY</label>
+										<?php echo timemass("fri"); ?>
+									</div>
+									<div class="field">
+										<label>SATURDAY</label>
+										<?php echo timemass("sat"); ?>
+									</div>
+								</div>
+
+								<button class="ui google plus button"><i class="remove icon"></i>Cancel</button>
+								<button class="ui facebook button" name="submit" type="submit"><i class="check icon"></i>Submit</button>
+							</form>
+						</div>
+						<div class="column"></div>
 					</div>
 				</div>
 			</div>
-			<div class="ui error message"></div>
-			<div class="ui two bottom attached buttons">
-				<button class="ui basic labeled red icon button"><i class="remove icon"></i>Cancel</button>
-				<button class="ui basic labeled green icon button" id="submit" name="submit"><i class="plus icon" ></i>Submit</button>
-			</div>
-		</form>
+		</div>
 	</div>
 </div>
 </body>
