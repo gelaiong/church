@@ -36,7 +36,9 @@
 			$churchID = $row_query['church_id'];
 			
 			$output .= "<option value = '$churchID'>$church</option> ";
+
 	    }
+
 	    return $output;
 	}
     
@@ -65,6 +67,9 @@
 		    	$query3 = "UPDATE account SET account_status = 'inactive' WHERE account_id = $id";
     		    mysqli_query($mysqli,$query3);
 		    }
+		}
+		if (isset($_POST['cancel'])){
+			header('Location: admins.php?page=1');
 		}
 
     }
@@ -110,21 +115,21 @@ function editAdminInfo(){
 	global $mysqli;
 	if(isset($_POST['up'])){
 		$aid = $_GET['aid'];
-		$church = $_POST['church'];
-		$address = $_POST['address'];
+		$church_id= $_POST['church'];
 		$name = $_POST['name'];
 		$contact = $_POST['contact'];
 
 
-		$query = "UPDATE admin JOIN church ON admin_church_id=church_id SET admin_name='".$name."', church_address='".$address."', church_name='".$church."',admin_contact='".$contact."' WHERE church_id = ".$aid;
+		$query = "UPDATE admin SET admin_name='".$name."', admin_church_id='".$church_id."',admin_contact='".$contact."' WHERE admin_id = ".$aid;
 
-		// print_r($query);
+		 // print_r($query);
 
 		$result = mysqli_query($mysqli,$query);
 		
 		if($result){
-	    	echo "<script>alert('successfully edited');</script>";
+	    	header('Location: admins.php?page=1');
 	    }
+		
 	}
 }
 function displayAdmins(){
@@ -158,7 +163,7 @@ function displayAdmins(){
 					<td class='three wide'>$church</td>
 					<td class='three wide'>$address</td>
 					<td>
-						<button class='ui vk button' onclick='admin_info($aid);'><i class='pencil alternate icon'></i>Update</button>
+						<a href = 'editadmin.php?aid=".$aid."' class='ui facebook button'><i class='pencil alternate icon'></i>Update<a>
 						<button class='ui google plus button' name='delete'><i class='ban icon'></i>Remove</button>
 						<input type='hidden' name = 'id' value = '$id' />
 					</td>
@@ -209,19 +214,15 @@ function displayAdInfo(){
 				<div class='field'>
 					<label>Church Name</label>
 					<select class='ui search dropdown' name='church'>
-						<option value='".$church."'>".$church."</option>
 						".selectChurch()."
 					</select>
 				</div>
-				<div class='field'>
-					<label>Church Address</label>
-					<input type='text' name='address' value='$address'>
-				</div>
+				
 			</div>
 		</div>
 		<div class='ui error message'></div>
 		<div class='ui two bottom attached buttons'>
-			<button class='ui basic labeled red icon button' name='cancel'><i class='remove icon'></i>Cancel</button>
+			<a href='admins.php?page=1' class='ui basic labeled red icon button'><i class='remove icon'></i>Cancel</a>
 			<button class='ui basic labeled green icon button' name='up' type='submit'><i class='pencil icon'></i>Update</button>
 		</div>
 		</form>
@@ -253,7 +254,6 @@ function displayChurches()
 						<td class='three wide'>--------</td>
 						<td class='two wide'>--------</td>
 						<td class='seven wide'>
-							<button class='ui vk button'><i class='pencil alternate icon'></i>Update</button>
 							<button class='ui google plus button' name='del'><i class='ban icon'></i>Remove</button>
 						</td>
 						<input type='hidden' name='cid' value='$cid'/>
