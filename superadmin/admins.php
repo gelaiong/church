@@ -75,8 +75,5 @@
 </body>
 </html>
 <script>
-function admin_info(id){
-	var myURL = 'editadmin.php?aid='+ id ;
-	window.open(myURL, "_self");
-}
+
 </script>
