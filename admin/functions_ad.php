@@ -189,9 +189,10 @@ function addschedule()
 {
 	global $mysqli;
 
-	if(isset($_POST['sub'])){
+	if(isset($_POST['submit'])){
 		$event = $_POST['event'];
 		$id = $_SESSION['account_id'];
+		$radio = $_POST['radio'];
 		$specsched = $_POST['specsched'];
 
 		$query = "SELECT * FROM admin  WHERE admin_account_id = $id";
@@ -200,7 +201,7 @@ function addschedule()
 
 		$church = $row_admin['admin_church_id'];
 	
-        if($specsched != "" ){
+        if($radio == '1' ){
         	
 
 		 $query1= "INSERT INTO `schedule`(`schedule_specific_sched`,`schedule_event`, `schedule_church_id`) VALUES ('$specsched','$event',$church)";
@@ -215,10 +216,6 @@ function addschedule()
 
 		$result1 = mysqli_query($mysqli,$query1);
 
-		if (!$result) {
-    		printf("Error: %s\n", mysqli_error($mysqli));
-    		exit();
-		}
 	}
 }
 
@@ -271,8 +268,6 @@ function displaySchedule()
 	$query = "SELECT * FROM schedule JOIN church  ON church_id = schedule_church_id JOIN admin ON admin_church_id = church_id WHERE schedule_status = 'active' LIMIT ".$page.",10";
     $run_query = mysqli_query($mysqli,$query);
 
-
-
     while ($row_query = mysqli_fetch_array($run_query)) {
 		$stime = $row_query['schedule_starttime'];
 		$day = $row_query['schedule_day'];
@@ -288,23 +283,27 @@ function displaySchedule()
 			$week = $row_query['schedule_week'];
 		}else{
 			$etime = "-------------";
-			$week =  "--------";
+			$week =  "-------------";
 		}
 
         if(empty($specsched)){
         	$specsched = "---------------------";
+        }else{
+        	$stime = "-------------";
+        	$etime = "-------------";
+        	$day = "-------------";
+        	$week = "-------------";
         }
 		echo "
 		    <form method ='POST' action ='schedules.php?page=1'>
 			<tr>
+				<td>".$event."</td>
 			    <td>".$specsched."</td>
 				<td>".$stime."</td>
 				<td>".$etime."</td>
 				<td>".$day."</td>
 				<td>".$week."</td>
-				<td>".$event."</td>
-				<td>".$church."</td>
-				<td>".$address."</td>
+				
 				<td>
 					<button type='button' class='ui vertical animated blue button' tabindex='0' onclick='sched_info(".$sid.");'>
 								<div class='visible content' >
