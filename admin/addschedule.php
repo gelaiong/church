@@ -65,14 +65,15 @@
 									</select>
 								</div>
 
-								<div class="ui radio checkbox" onclick="disableFunc(1)"><input type="radio" name="radio" ><label>No specific schedule</label></div>
-								<div class="ui disabled myclass segment" id="opt1">
+								<div class="ui radio checkbox" onclick="disableFunc(1)"><input type="radio" name="radio" value="1"><label>No specific schedule</label></div>
+								<div class="ui segment myclass toHide" id="opt1">
 									<input type="text" name="specsched"><br>
 									<p>ex. By appointment/ By arrangement/ Not offered in this church</p>
 								</div>
-								<div class="ui radio checkbox" onclick="disableFunc(2)"><input type="radio" name="radio" ><label>By schedule</label></div>
-								<div class="ui disabled segment" id="opt2">
-									<div class="four fields">
+								<div class="ui hidden divider"></div>
+								<div class="ui radio checkbox" onclick="disableFunc(2)"><input type="radio" name="radio" value="2"><label>By schedule</label></div>
+								<div class="ui segment toHide" id="opt2" >
+									<div class="two fields">
 										<div class="field">
 											<label>Start Time</label>
 											<select class="ui search dropdown" name="start">
@@ -87,6 +88,8 @@
 												<?php echo timelist(); ?>
 											</select>
 										</div>
+									</div>
+									<div class="two fields">
 										<div class="field">
 											<label>Week</label>
 											<select class="ui search dropdown" name="week">
@@ -113,9 +116,9 @@
 										</div>
 									</div>
 								</div>
-
+								<div class="ui hidden divider"></div>
 								<button class="ui google plus button"><i class="remove icon"></i>Cancel</button>
-								<button class="ui facebook button" name="submit" type="submit"><i class="check icon"></i>Submit</button>
+								<button class="disabled ui facebook button" name="submit" type="submit" id="submit"><i class="check icon"></i>Submit</button>
 							</form>
 						</div>
 						<div class="four wide column"></div>
@@ -134,15 +137,24 @@ $(document).ready(function(){
 	$('ui.checkbox').click(function(){
 		$('myclass').removeClass("disabled");
 	})
+	$('.toHide').hide();
 });
 
-function disableFunc(id)
-{
-	if(id==1){
-		document.getElementById('opt1').className = document.getElementById('opt1').className.replace ( /(?:^|\s)disabled(?!\S)/g, '');
-	}else{
-		document.getElementById('opt2').classList.remove("disabled");
-	}
-}
+// function disableFunc(id)
+// {
+// 	if(id==1){
+// 		document.getElementById('opt1').className = document.getElementById('opt1').className.replace ( /(?:^|\s)disabled(?!\S)/g, '');
+// 	}else{
+// 		document.getElementById('opt2').classList.remove("disabled");
+// 	}
+// }
+
+$(function() {
+    $('[name=radio]').click(function(){
+            $('.toHide').hide();
+            $('#opt'+$(this).val()).show('slow');
+            $('#submit').removeClass('disabled');
+    });
+ });
 
 </script>

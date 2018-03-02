@@ -65,9 +65,12 @@
 						<thead>
 							<tr>
 								<th><h4 class="ui header">Service</h4></th>
-								<th><h4 class="ui header">Church Name</h4></th>
-								<th><h4 class="ui header">Time</h4></th>
+								<th><h4 class="ui header">Specific Schedule</h4></th>
+								<th><h4 class="ui header">Start Time</h4></th>
+								<th><h4 class="ui header">End Time</h4></th>
+								<th><h4 class="ui header">Week</h4></th>
 								<th><h4 class="ui header">Day</h4></th>
+								<th><h4 class="ui header">Actions</h4></th>
 							</tr>
 						</thead>
 					</table>
