@@ -3,8 +3,8 @@ USE church_schedule;
 
 CREATE TABLE `church`(
 	church_id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	church_name varchar(70) UNIQUE NOT NULL,
-	church_address varchar(60) NOT NULL,
+	church_name varchar(100) UNIQUE NOT NULL,
+	church_address varchar(100) NOT NULL,
 	church_info text,
 	church_status enum('active','inactive') DEFAULT 'active'
 );
@@ -12,7 +12,7 @@ CREATE TABLE `church`(
 
 CREATE TABLE account(
     account_id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    account_username varchar(15) UNIQUE NOT NULL,
+    account_username varchar(50) UNIQUE NOT NULL,
     account_password char(16) NOT NULL,
     account_type enum('admin','superadmin') DEFAULT 'admin',
     account_status enum('active','inactive') DEFAULT 'active'
@@ -20,7 +20,7 @@ CREATE TABLE account(
 
 CREATE TABLE admin(
 	admin_id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	admin_name varchar(20) NOT NULL,
+	admin_name varchar(50) NOT NULL,
 	admin_contact char(11) NOT NULL,
 	admin_account_id int(11) UNIQUE NOT NULL,
 	admin_church_id int(11) UNIQUE NOT NULL,

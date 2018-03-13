@@ -12,6 +12,9 @@
 	<link rel="stylesheet" href="../semantic/semantic.min.css">
 	<script src="../jquery/jquery.min.js"></script>
 	<script src="../semantic/semantic.min.js"></script>
+	<script type="text/javascript" src = "../tinymce/js/jquery.min.js"></script>
+    <script type="text/javascript" src = "../tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+    <script type="text/javascript" src = "../tinymce/js/tinymce/tinymce.min.js"></script>
 </head>
 <body style="background: #ededed;">
 <div class="ui basic bottom attached segment">
@@ -42,20 +45,7 @@
 		</div>
 		<div class="ui hidden divider"></div>
 		<div class="container">
-			<div class="ui segment">
-				<h1 class="ui grey dividing header">
-					<img src="../img/church.png" class="ui huge image">
-					<div class="content">
-			           	CHURCH NAME
-		              <div class="sub header">Displays the church information</div>
-	            	</div>
-            		<div class="two wide column"></div>
-        		</h1>
-        		<p>Image here....</p>
-        		<p>Lorem ipsum ......</p>
-        		<div class="ui hidden divider"></div>
-        		<button onclick="window.open('editchurch.php', '_self')" class="ui facebook button"><i class="add icon"></i>EDIT CHURCH INFO</button>
-			</div>
+			<?php dashboard(); ?>
 		</div>
 
 	</div>
@@ -71,5 +61,22 @@ function edit_info(id){
 	var myURL = 'editchurch.php?cid='+ id ;
 	window.open(myURL, "_self");
 }
+  tinymce.init({
+  selector: 'textarea',
+  height: 350,
+  menubar: false,
+  plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table contextmenu paste code jbimages'
+  ],
+  toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | jbimages',   
+  relative_urls : false, 
+  remove_script_host : false,
+ 
+});
+
+
+
 
 </script>

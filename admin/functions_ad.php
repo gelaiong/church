@@ -11,6 +11,44 @@ function sessionAdmin()
         header("location:../login.php");
     }
 }
+
+function dashboard(){
+	global $mysqli;
+
+	
+	$id = $_SESSION['account_id'];
+
+	$query_admin = "SELECT * FROM admin WHERE admin_account_id = ".$id;
+	$result_admin = mysqli_query($mysqli,$query_admin);
+	$row_admin = mysqli_fetch_array($result_admin);
+
+	$id = $row_admin['admin_church_id'];
+
+	$query_church = "SELECT * FROM church WHERE church_id = ".$id;
+	
+	$result_church = mysqli_query($mysqli,$query_church);
+
+    $row_church = mysqli_fetch_array($result_church);
+	$church = $row_church['church_name'];
+	$address = $row_church['church_address'];
+	$church_info = $row_church['church_info'];
+	$cid = $row_church['church_id'];
+
+
+	echo '<div class="ui segment">
+				<h1 class="ui grey dividing header">
+					<img src="../img/church.png" class="ui huge image">
+					<div class="content">
+			          '.$church.'
+		              <div class="sub header">Displays the church information</div>
+	            	</div>
+            		<div class="two wide column"></div>
+        		</h1>
+        		<p>	'.$church_info.'</p>
+        		<div class="ui hidden divider"></div>
+        		<button onclick="edit_info('.$cid.')" class="ui facebook button"><i class="add icon"></i>EDIT CHURCH INFO</button>
+			</div>';
+}
 function timelist()
 {
 	$output = '';
@@ -224,7 +262,7 @@ $church = $row_query['church_name'];
 $address = $row_query['church_address'];
 $info = $row_query['church_info'];
 echo"
-<form class='ui form' method='POST' action='index.php?cid=".$id."'>
+<form class='ui form' method='POST' action='churches.php?page=1&cid=".$id."'>
 <div class='ui attached fluid  basic blue segment'>
 				<div class='two fields'>
 					<div class='field'>
@@ -238,7 +276,7 @@ echo"
 				</div>
 				<div class='field'>
 					<label>Church Info</label>
-					<textarea name='info' class='tinymce' value=$info </textarea>
+					<textarea name='info' class='tinymce' value=$info> </textarea>
 				</div>
 			</div> ";
 }
@@ -290,7 +328,6 @@ function displaySchedule()
         	$week = "-------------";
         }
 		echo "
-		    <form method ='POST' action ='schedules.php?page=1'>
 			<tr>
 				<td class='one wide'>".$event."</td>
 			    <td class='three wide'>".$specsched."</td>
@@ -301,13 +338,11 @@ function displaySchedule()
 				
 				<td class='six wide'>
 					<button type='button' class='ui facebook button' onclick='sched_info(".$sid.");'><i class='pencil icon'></i>Edit</button>
-					<button class='ui google plus button' name='del'><i class='ban icon'></i>Remove</button>
-					<input type='hidden' name ='sid' value = '$sid' />
+					<a class='ui google plus button delete' name='del' data-id='".$sid."'><i class='ban icon'></i>Remove</a>
 				    
 						</td>
 						
-			</tr> 
-			</form>";
+			</tr> ";
 
     }
 }

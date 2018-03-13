@@ -79,13 +79,17 @@
 
 
 <div class="ui mini modal" id="confirm">
+
   <div class="header">Delete church</div>
   <div class="content">
     <p>Are you sure you want to delete this church?</p>
   </div>
   <div class="actions">
-  	<div class="ui google plus button">Cancel</div>
-    <div class="ui facebook button" name='del'>Delete</div>
+  	<form method='POST' action='churches.php?page=1'>
+	  	<div class="ui google plus button cancel">Cancel</div>
+	    <input type='submit' class="ui facebook button" name='del' value='Delete'>
+	    <input type='hidden' name='cid' value='' id='cid'/>
+	</form>
   </div>
 </div>
 
@@ -94,9 +98,13 @@
 
 <script>
 $(document).ready(function(){
-	$('#delete').click(function(){
+	$('.delete').click(function(){
 		$('#confirm').modal('show');
-	})
+		$('#cid').val($(this).data("id"));
+	});
+	$('.cancel').click(function(){
+		$('#confirm').modal('hide');
+	});
 })
 function church_info(id){
 	var myURL = 'editchurch.php?cid='+ id ;

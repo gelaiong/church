@@ -200,10 +200,11 @@ function displaySched($event)
 				</tr> ";
 				}
 
-				echo '</tbody>
+				
+		    }
+		    echo '</tbody>
 				</table>
 				';
-		    }
 
 		}else{
 			echo "
@@ -582,8 +583,6 @@ function displayAllServices()
 		    $n = $_GET['page'];
     		$page = ($n * 10)-10;
 
-
-
     		if($option1 != "" && $option2=="" && $option3==""){
     			 $query = "SELECT * FROM schedule JOIN church 
         		  ON church_id = schedule_church_id JOIN admin 
@@ -688,14 +687,15 @@ function displayAllServices()
 		     $count = mysqli_num_rows($result);
 
 		    if($count > 0){
-		    	$output.='<table class="ui very padded very basic mobile tablet small monitor fixed single line striped table">
-					<thead>
-						<tr>
-							<th>Church</th>
-							<th>Address</th>
-						</tr>
-					</thead>
-					<tbody>';
+		     $output.="<table class='ui fixed very basic mobile tablet small monitor only stackable celled padded striped table'>
+				<thead>
+					<tr>
+						<th>CHURCH</th>
+						<th>ADDRESS</th>
+					</tr>
+				</thead>
+				<tbody>
+			";
 		    	
 				 while ($row_query = mysqli_fetch_array($result)) {
 					$church = $row_query['church_name'];
@@ -703,8 +703,8 @@ function displayAllServices()
 					$cid = $row_query['church_id'];
 					$output .= "
 					<tr class='clickable-row' onclick='open_info($cid);'>
-						<td>$church</td>
-						<td>$address</td>
+						<td class='eight wide'>$church</td>
+						<td class='eight wide'>$address</td>
 					</tr>";
 			    }
 			    $output .="</tbody>
@@ -719,7 +719,7 @@ function displayAllServices()
 					</div>
 				</div>";
 	    }
-	
+	    echo $output;
     }
 function searchAllService($search){
 	global $mysqli;

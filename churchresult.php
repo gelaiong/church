@@ -31,58 +31,56 @@
 		<div class="right item">
 		</div> <!-- right item -->
 	</div> <!-- menu -->
-
 	<div class="content" id="context">
 		<div class="ui grid">
 			<div class="row"></div>
 			<div class="column"></div>
 			<div class="fourteen wide column">
 				<h1 class="ui grey dividing header">
-					<i class="search icon"></i> 
+					<img src="img/church.png" class="ui huge image">
 					<div class="content">
-			           	SEARCH RESULTS
-		              <div class="sub header">Showing church results</div>
+			           	CHURCHES
+		              <div class="sub header">List of churches within Cebu Province</div>
 	            	</div>
-	        		<div class="two wide column"></div>
-	    		</h1> <!-- header --> 
-	    		<h3>SEARCH</h3>
-					<div class="ui form">
-						<div class="inline fields">
-							<div class="field">
-								<select class="ui search dropdown" id="option1">
-									<option value="">Church</option>
-									<?php dropdownchurch(); ?>
-									<!--  -->
-								</select>
-							</div>
-							<div class="field">
-								<select class="ui search dropdown" id="option2">
-									<option value="">Address</option>
-									<?php dropdownaddress(); ?>
-									<!--  -->
-								</select>
-							</div>
-							<div class="field">
-								<select class="ui search dropdown" id="option3">
-									<option value="">Time</option>
-									<?php echo timelist(); ?>
-									
-								</select>
-							</div>
-							<button  type ="button" name = "searchbutton" id="searchbutton" class="searching circular ui basic icon button" onclick="open_search(); " ><i class="search link icon"></i></button>
+            		<div class="two wide column"></div>
+        		</h1> <!-- header --> 
+        		<!-- <div class="ui breadcrumb">
+					<a class="section" href="home.php">Home</a>
+					<i class="right chevron icon divider"></i>
+					<div class="active section">View churches</div>
+				</div> -->
+				<h3>SEARCH</h3>
+				<form class="ui form" method = "POST" action = "churches.php">
+					<div class="inline fields">
+						<div class="field">
+							<select class="ui search dropdown" id="option1">
+								<option value="">Church</option>
+								<?php dropdownchurch(); ?>
+								<!--  -->
+							</select>
 						</div>
+						<div class="field">
+							<select class="ui search dropdown" id="option2">
+								<option value="">Address</option>
+								<?php dropdownaddress(); ?>
+								<!--  -->
+							</select>
+						</div>
+						<button  type ="button" name = "searchbutton" id="searchbutton" class="searching circular ui basic icon button" onclick="open_search(); " ><i class="search link icon"></i></button>
 					</div>
-					<div class="ui hidden divider"></div>
-					<?php 
+				</form>
+				<div class="ui hidden divider"></div>
+				<?php 
 					$option1 = $_GET['option1'];
 					$option2 = $_GET['option2'];
 					$page = $_GET['page'];
 					churchsearch($option1,$option2);
 					searchpages($option1,$option2,"","","","churchresult.php","church","",$page);
 				?>
-				</div>
 			</div>
-		</div> <!-- grid -->
+			<div class="column"></div>
+			
+		</div>
 	</div> <!-- content -->
 </div>
 </body>

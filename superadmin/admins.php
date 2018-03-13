@@ -75,13 +75,16 @@
 
 
 <div class="ui mini modal" id="confirm">
-  <div class="header">Delete church</div>
+  <div class="header">Delete administrator</div>
   <div class="content">
-    <p>Are you sure you want to delete this church?</p>
+    <p>Are you sure you want to delete this administrator?</p>
   </div>
   <div class="actions">
-  	<div class="ui google plus button">Cancel</div>
-    <div class="ui facebook button" name='del'>Delete</div>
+  	<form method='POST' action='admins.php?page=1'>
+	  	<div class="ui google plus button cancel ">Cancel</div>
+	    <input type='submit' class="ui facebook button" name='delAd' value="Delete">
+	    <input type='hidden' name='id' value='' id='id'/>
+	</form>
   </div>
 </div>
 
@@ -90,8 +93,12 @@
 </html>
 <script>
 $(document).ready(function(){
-	$('#delete').click(function(){
+	$('.delete').click(function(){
 		$('#confirm').modal('show');
-	})
+		$('#id').val($(this).data("id"));
+	});
+	$('.cancel').click(function(){
+		$('#confirm').modal('hide');
+	});
 })
 </script>
