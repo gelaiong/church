@@ -22,7 +22,7 @@
 		<div class="item">
 			<center><h4>ADMINISTRATOR</h4></center>
 		</div>
-		<a href="home.php"><div class="active item" style="background: #ededed; color: black !important;"><i class="home left icon"></i>Home</div></a>
+		<a href="index.php" class="active item" style="background: #ededed; color: black !important;"><i class="home left icon"></i>Home</a>
 		<a href="schedules.php?page=1" class="item"><i class="calendar icon"></i>Schedules</a>
 		<div class="ui hidden divider"></div>
 		<div class="ui hidden divider"></div>
@@ -36,11 +36,27 @@
 		?>
 	</div>
 	<div class="pusher" style="max-width: 79% !important;">
-		<div class="ui breadcrumb" style="background: white; padding-top: 16px; padding-bottom: 16px; padding-left: 20px; margin-left: -22px; margin-top:-20px; padding-right: 96%; margin-right: -25px;">
+		<div class="ui breadcrumb">
 			<div class="divider"> <i class="right chevron icon"></i> </div>
 			<div class="active section">Home</div>
 		</div>
 		<div class="ui hidden divider"></div>
+		<div class="container">
+			<div class="ui segment">
+				<h1 class="ui grey dividing header">
+					<img src="../img/church.png" class="ui huge image">
+					<div class="content">
+			           	CHURCH NAME
+		              <div class="sub header">Displays the church information</div>
+	            	</div>
+            		<div class="two wide column"></div>
+        		</h1>
+        		<p>Image here....</p>
+        		<p>Lorem ipsum ......</p>
+        		<div class="ui hidden divider"></div>
+        		<button onclick="window.open('editchurch.php', '_self')" class="ui facebook button"><i class="add icon"></i>EDIT CHURCH INFO</button>
+			</div>
+		</div>
 
 	</div>
 </div>

@@ -30,11 +30,29 @@
 		<a href="../logout.php" class="item"><i class="sign out icon"></i>Logout</a>
 	</div>
 	<div class="pusher" style="max-width: 79% !important;">
-		<div class="ui breadcrumb" style="background: white; padding-top: 16px; padding-bottom: 16px; padding-left: 20px; margin-left: -22px; margin-top:-20px; padding-right: 96%; margin-right: -25px;">
+		<div class="ui breadcrumb">
 			<div class="divider"> <i class="right chevron icon"></i> </div>
 			<div class="active section">Home</div>
 		</div>
 		<div class="ui hidden divider"></div>
+		<div class="container">
+			<div class="ui segment">
+				<div class="ui center aligned middle aligned grid">
+					<div class="eight wide middle aligned aligned right aligned column">
+						<img src="../img/church.png" class="ui tiny centered image">
+					</div>
+					<div class="eight wide middle aligned left aligned column">
+						<p style="font-size: 3em; font-family: sans-serif;">10 CHURCHES</p>
+					</div>
+					<div class="eight wide middle aligned aligned right aligned column">
+						<center><h1 class="ui grey header"><i class="user grey icon"></i></h1></center>
+					</div>
+					<div class="eight wide middle aligned left aligned column">
+						<p style="font-size: 3em; font-family: sans-serif;">10 ADMINS</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 </body>

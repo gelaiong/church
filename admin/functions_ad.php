@@ -50,25 +50,20 @@ function accinfo(){
 
 	echo '
 	<form class="ui form" method = "POST" action = "index.php?id='.$id.'">
-		<div class="ui attached fluid  basic blue segment">
-				<div class="field">
-					<label>Contact Number</label>
-					<input type="number" name="newnum" value="'.$contact.'">
-				</div>
-				<div class="field">
-					<label>Password</label>
-					<input type="password" name="newpass" value="'.$password.'">
-				</div>
-				<div class="field">
-					<label>Re-enter Password</label>
-					<input type="password" name="newpass2">
-				</div>
-			</div>
-			<div class="ui error message"></div>
-			<div class="ui two bottom attached buttons">
-				<button class="ui basic labeled red icon button"><i class="remove icon"></i>Cancel</button>
-				<button class="ui basic labeled green icon button" name="updateacc"><i class="pencil icon"></i>Update</button>
-			</div>
+		<div class="field">
+			<label>Contact Number</label>
+			<input type="number" name="newnum" value="'.$contact.'">
+		</div>
+		<div class="field">
+			<label>Password</label>
+			<input type="password" name="newpass" value="'.$password.'">
+		</div>
+		<div class="field">
+			<label>Re-enter Password</label>
+			<input type="password" name="newpass2">
+		</div>
+		<button class="ui google plus button"><i class="remove icon"></i>Cancel</button>
+		<button class="ui facebook button" name="updateacc"><i class="pencil icon"></i>Update</button>
 	</form>';
 }
 function manageacc()
@@ -297,28 +292,18 @@ function displaySchedule()
 		echo "
 		    <form method ='POST' action ='schedules.php?page=1'>
 			<tr>
-				<td>".$event."</td>
-			    <td>".$specsched."</td>
-				<td>".$stime."</td>
-				<td>".$etime."</td>
-				<td>".$day."</td>
-				<td>".$week."</td>
+				<td class='one wide'>".$event."</td>
+			    <td class='three wide'>".$specsched."</td>
+				<td class='two wide'>".$stime."</td>
+				<td class='two wide'>".$etime."</td>
+				<td class='two wide'>".$day."</td>
+				<td class='two wide'>".$week."</td>
 				
-				<td>
-					<button type='button' class='ui vertical animated blue button' tabindex='0' onclick='sched_info(".$sid.");'>
-								<div class='visible content' >
-									<i class='pencil icon'></i>
-								</div>
-								<div class='hidden content'>Edit</div>
-							</button>
-							<button class='ui vertical animated red button' tabindex='0' name='del'>
-								<div class='visible content'>
-									<i class='trash icon'></i>
-								</div>
-								<div class='hidden content'>Remove</div>
-								
-							</button>
-							<input type='hidden' name ='sid' value = '$sid' />
+				<td class='six wide'>
+					<button type='button' class='ui facebook button' onclick='sched_info(".$sid.");'><i class='pencil icon'></i>Edit</button>
+					<button class='ui google plus button' name='del'><i class='ban icon'></i>Remove</button>
+					<input type='hidden' name ='sid' value = '$sid' />
+				    
 						</td>
 						
 			</tr> 
@@ -326,6 +311,23 @@ function displaySchedule()
 
     }
 }
+
+
+// <button class=''></button>
+// 					<button type='button' class='ui vertical animated blue button' tabindex='0' onclick='sched_info(".$sid.");'>
+// 								<div class='visible content' >
+// 									<i class='pencil icon'></i>
+// 								</div>
+// 								<div class='hidden content'>Edit</div>
+// 							</button>
+// 							<button class='ui vertical animated red button' tabindex='0' name='del'>
+// 								<div class='visible content'>
+// 									<i class='trash icon'></i>
+// 								</div>
+// 								<div class='hidden content'>Remove</div>
+								
+// 							</button>
+// 							<input type='hidden' name ='sid' value = '$sid' />
 
 function pages($url,$table){
  	global $mysqli;

@@ -16,54 +16,58 @@
     <script type="text/javascript" src = "../tinymce/js/tinymce/tinymce.min.js"></script>
 </head>
 </head>
-<body>
-<div class="ui top attached borderless menu">
-	<div class="right menu">
-		<a class="item" href="../logout.php"><i class="sign out icon"></i>Log out</a>
+<body style="background: #ededed;">
+	<div class="ui basic bottom attached segment">
+	<div class="ui large left vertical visible sidebar inverted borderless small menu" style="box-shadow: none !important;">
+		<div class="item" id="slogo">
+			<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
+		</div>
+		<div class="item">
+			<center><h4>ADMINISTRATOR</h4></center>
+		</div>
+		<a href="index.php" class="active item" style="background: #ededed; color: black !important;"><i class="home left icon"></i>Home</a>
+		<a href="schedules.php?page=1" class="item"><i class="calendar icon"></i>Schedules</a>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<?php 
+		    $id = $_SESSION['account_id'];
+			echo '
+			<a href="manageaccount.php?aid='.$id.'" class="item"><i class="pencil alternative icon"></i>Edit Profile</a>
+			<a href="../logout.php" class="item"><i class="sign out icon"></i>Logout</a>';
+		?>
 	</div>
-</div>
-<div class="ui left visible vertical sidebar menu"> 
-	<div class="item" id="slogo">
-		<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
-	</div>
-	<a class="item" href="home.php"><i class="home icon"></i>Home</a>
-	<a class="active item" href="churches.php?page=1"><i class="plus icon"></i>Churches</a>
-	<a class="item" href="schedules.php?page=1"><i class="calendar icon"></i>Schedules</a>
-	<a class="item" href="admins.php?page=1"><i class="user icon"></i>Admin</a>
-</div>
-<div class="ui pusher">
-	<div class="content" id="content">
-		<div class="ui stackable two column grid">
-			<div class="column">
-				<h1 class="ui header">
-					<i class="circular pencil icon"></i>
-					<div class="content">
-						Churches
-						<div class="sub header">Edit Church Info</div>
+	<div class="pusher" style="max-width: 79% !important;">
+		<div class="ui breadcrumb">
+			<div class="divider"> <i class="right chevron icon"></i> </div>
+			<a href="index.php" class="section">Home</a>
+			<div class="divider"> / </div>
+			<div class="active section">Church Information</div>
+		</div>
+		<div class="ui hidden divider"></div>
+		<div class="container">
+			<div class="ui segments">
+				<div class="ui segment">
+					<h3 class="ui header">EDIT CHURCH INFORMATION</h3>
+				</div>
+				<div class="ui padded segment">
+					<div class="ui center aligned grid">
+						<div class="column"></div>
+						<div class="fourteen wide left aligned middle aligned column">
+							<?php  displayChurchInfo();   ?>
+							<div class="ui error message"></div>
+							<div class="ui two bottom attached buttons">
+								<button class="ui google plus button"><i class="remove icon"></i>Cancel</button>
+								<button class="ui facebook button" name="update"><i class="pencil icon"></i>Update</button>
+							</div>
+						</div>
+						<div class="column"></div>
 					</div>
-				</h1>
-				<div class="ui breadcrumb">
-					<a class="section" href="churches.php?page=1">Churches</a>
-					<i class="right chevron icon divider"></i>
-					<div class="active section">Edit church info</div>
-				</div> <!-- ui breadcrumb -->
+				</div>
 			</div>
-			<div class="middle aligned column"></div>
 		</div>
-		<div class="ui attached message">
-			<p>All fields are required.</p>
-		</div>
-		<!-- action="churches.php?page=1" -->
-			<?php  displayChurchInfo();   ?>
-			<div class="ui error message"></div>
-			<div class="ui two bottom attached buttons">
-				<button class="ui basic labeled red icon button"><i class="remove icon"></i>Cancel</button>
-				<button class="ui basic labeled green icon button" name="update"><i class="pencil icon"></i>Update</button>
-			</div>
-		</form>
 	</div>
-</div>
-
 </body>
 </html>
 <script>

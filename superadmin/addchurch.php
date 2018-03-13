@@ -34,7 +34,7 @@
 		<a href="../logout.php" class="item"><i class="sign out icon"></i>Logout</a>
 	</div>
 	<div class="pusher" style="max-width: 79% !important;">
-		<div class="ui breadcrumb" style="background: white; padding-top: 16px; padding-bottom: 16px; padding-left: 20px; margin-left: -22px; margin-top:-20px; padding-right: 82%; margin-right: -30px;">
+		<div class="ui breadcrumb" >
 			<div class="divider"> <i class="right chevron icon"></i> </div>
 			<a href="home.php" class="section">Home</a>
 			<div class="divider"> / </div>

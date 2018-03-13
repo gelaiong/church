@@ -48,9 +48,48 @@ include("functions.php");
 	            	</div>
             		<div class="two wide column"></div>
         		</h1> <!-- header --> 
+        		<h3>SEARCH</h3>
+				<div class="ui form">
+					<div class="inline fields">
+						<div class="field">
+							<select class="ui search dropdown" id="option1">
+								<option value="">Church</option>
+								<?php dropdownchurch(); ?>
+								<!--  -->
+							</select>
+						</div>
+						<div class="field">
+							<select class="ui search dropdown" id="option2">
+								<option value="">Address</option>
+								<?php dropdownaddress(); ?>
+								<!--  -->
+							</select>
+						</div>
+						<div class="field">
+							<select class="ui search dropdown" id="option3">
+								<option value="">Time</option>
+								<?php echo timelist(); ?>
+								
+							</select>
+						</div>
+						<button  type ="button" name = "searchbutton" id="searchbutton" class="searching circular ui basic icon button" onclick="open_search(); " ><i class="search link icon"></i></button>
+					</div>
+				</div>
+				<div class="ui hidden divider"></div>
 				<?php displaySched("Confession"); ?>
-			
+			</div>
+			<div class="column"></div>
+			<div class="row">
+				<div class="two wide column"></div>
+				<?php pages("confession.php","schedule","Confession"); ?>
+				<div class="two wide column"></div>
+			</div>
 		</div>
+		<!-- <div class="ui grid">
+			<div class="two wide column"></div>
+			<div class="two wide column"></div>
+			<div class="two wide column"></div>
+		</div> -->
 	</div> <!-- content -->
 </div>
 </body>

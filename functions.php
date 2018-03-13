@@ -20,15 +20,17 @@
 		if($cnt!=0){
 
 			echo 
-			'<table class="ui teal inverted large table">
+			'
+
+			<table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
 				<thead>
-					<th class="two wide">SCHEDULE</th>
-					<th class="two wide">DAY</th>
-					<th class="seven wide">CHURCH</th>
-					<th>ADDRESS</th>
+					<tr>
+						<th>SCHEDULE</th>
+						<th>DAY</th>
+						<th>CHURCH</th>
+						<th>ADDRESS</th>
+					</tr>
 				</thead>
-			</table>
-			<table class="ui very basic striped large table">
 				<tbody>
 			';
 
@@ -42,9 +44,9 @@
 				echo 
 				"
 				<tr>
-					<td class='two wide'>$time</td>
-					<td class='two wide'>$day</td>
-					<td class='seven wide'>$church</td>
+					<td>$time</td>
+					<td>$day</td>
+					<td>$church</td>
 					<td>$address</td>
 				</tr> ";
 		    }
@@ -52,7 +54,14 @@
 				</table> <!-- table -->
 				<button class="ui basic icon button" value="View More" onclick="open_churches()" name="">View More</button>';
 		}else{
-			echo "<i class='warning circle icon'></i>No schedules to display.";
+			echo "<div class='ui grid'>
+					<div class='row'></div>
+					<div class='sixteen wide column'>
+						<div class='ui grey inverted segment'>
+							<center><h3><i class='warning circle icon'></i>No schedules to display.</h3></center>
+						</div>
+					</div>
+				</div>";
 		}
 
 	        
@@ -130,64 +139,36 @@ function displaySched($event)
 		$cnt=mysqli_num_rows($run_query);
 
 		if($cnt!=0){
-			echo '
-				<h3>SEARCH</h3>
-				<div class="ui form">
-					<div class="inline fields">
-						<div class="field">
-							<select class="ui search dropdown" id="option1">
-								<option value="">Church</option>
-								<?php dropdownchurch(); ?>
-								<!--  -->
-							</select>
-						</div>
-						<div class="field">
-							<select class="ui search dropdown" id="option2">
-								<option value="">Address</option>
-								<?php dropdownaddress(); ?>
-								<!--  -->
-							</select>
-						</div>
-						<div class="field">
-							<select class="ui search dropdown" id="option3">
-								<option value="">Time</option>
-								<?php echo timelist(); ?>
-								
-							</select>
-						</div>
-						<button  type ="button" name = "searchbutton" id="searchbutton" class="searching circular ui basic icon button" onclick="open_search(); " ><i class="search link icon"></i></button>
-					</div>
-				</div>
-				<div class="ui hidden divider"></div>
-			';
 			if($event=="Baptism"){
 				echo
-				'<table class="ui teal inverted large table">
-					<thead>
-						<th class="four wide">CHURCH</th>
-						<th class="four wide">ADDRESS</th>
-						<th class="one wide">TIME</th>
-						<th class="one wide">DAY/WEEK</th>
-						<th class="two wide">CONTACT NUMBER</th>
-					</thead>
-				</table>
-				<table class="ui very basic striped large table">
-					<tbody>
+				'
+				<table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
+				<thead>
+					<tr>
+						<th>CHURCH</th>
+						<th>ADDRESS</th>
+						<th>TIME</th>
+						<th>DAY/WEEK</th>
+						<th>CONTACT NUMBER</th>
+					</tr>
+				</thead>
+				<tbody>
 				';
 			}else{
 				echo
-				'<table class="ui teal inverted large table">
-					<thead>
-						<th class="three wide">CHURCH</th>
-						<th class="two wide">ADDRESS</th>
-						<th class="one wide">START TIME</th>
-						<th class="one wide">END TIME</th>
-						<th class="one wide">DAY/WEEK</th>
-						<th class="two wide">CONTACT NUMBER</th>
-					</thead>
-				</table>
-				<table class="ui very basic striped large table">
-					<tbody>
+				'
+				<table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
+				<thead>
+					<tr>
+						<th>CHURCH</th>
+						<th>ADDRESS</th>
+						<th>START TIME</th>
+						<th>END TIME</th>
+						<th>DAY/WEEK</th>
+						<th>CONTACT NUMBER</th>
+					</tr>
+				</thead>
+				<tbody>
 				';
 			}
 			while ($row_query = mysqli_fetch_array($run_query)) {
@@ -201,52 +182,36 @@ function displaySched($event)
 				if($event == "Baptism"){
 					echo "
 					<tr>
-						<td id='church' class='four wide'>$church</td>
-						<td id='address' class='four wide'>$address</td>
-						<td id='stime' class='one wide'>$stime</td>
-						<td id='day' class='one wide'>$day</td>
-						<td id='contact' class='two wide'>$contact</td>
+						<td id='church'>$church</td>
+						<td id='address'>$address</td>
+						<td id='stime'>$stime</td>
+						<td id='day'>$day</td>
+						<td id='contact'>$contact</td>
 					</tr> ";
 				}else{
 					echo "
 				<tr>
-					<td id='church' class='three wide'>$church</td>
-					<td id='address' class='two wide'>$address</td>
-					<td id='stime' class='one wide'>$stime</td>
-					<td id='etime' class='one wide'>$etime</td>
-					<td id='day' class='one wide'>$day</td>
-					<td id='contact' class='two wide'>$contact</td>
+					<td id='church'>$church</td>
+					<td id='address'>$address</td>
+					<td id='stime'>$stime</td>
+					<td id='etime'>$etime</td>
+					<td id='day'>$day</td>
+					<td id='contact'>$contact</td>
 				</tr> ";
 				}
-		    }
-	 		$pageName;
 
-	 		if($event=="Pre-Cana"){
-	 			$pageName="precana";
-	 		}else if($event=="Pre-Jordan"){
-	 			$pageName="prejordan";
-	 		}else{
-	 			$pageName=$event;
-	 		}
-
-			echo '</tbody>
+				echo '</tbody>
 				</table>
-				</div>
-				<div class="column"></div>
-				<div class="row">
-					<div class="two wide column"></div>
-					<?php pages("$pageName.php","schedule", $event); ?>
-					<div class="two wide column"></div>
-				</div>
-
 				';
+		    }
+
 		}else{
 			echo "
 				<div class='ui grid'>
 					<div class='row'></div>
 					<div class='sixteen wide column'>
 						<div class='ui grey inverted segment'>
-							<i class='warning circle icon'></i>No schedules to display.
+							<center><h3><i class='warning circle icon'></i>No schedules to display.</h3></center>
 						</div>
 					</div>
 				</div>
@@ -295,16 +260,19 @@ function displaySched($event)
 		';
 
 		if($cnt!=0){
-			echo '<table class="ui teal inverted large table">
+			echo '
+
+			<table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
 				<thead>
-					<th class="six wide">Church</th>
-					<th class="five wide">Address</th>
-					<th class="two wide">Time</th>
-					<th>Day/Week</th>
+					<tr>
+						<th>CHURCH</th>
+						<th>ADDRESS</th>
+						<th>TIME</th>
+						<th>DAY/WEEK</th>
+					</tr>
 				</thead>
-			</table>
-			<table class="ui very basic striped large table">
-				<tbody>';
+				<tbody>
+			';
 			while ($row_query = mysqli_fetch_array($run_query)) {
 				$time = $row_query['schedule_starttime'];
 				$day = $row_query['schedule_day'];
@@ -313,9 +281,9 @@ function displaySched($event)
 
 				echo "
 				<tr>
-					<td class='six wide'>$church</td>
-					<td class='five wide'>$address</td>
-					<td class='two wide'>$time</td>
+					<td>$church</td>
+					<td>$address</td>
+					<td>$time</td>
 					<td>$day</td>
 				</tr> ";
 		    }
@@ -328,7 +296,7 @@ function displaySched($event)
 					<div class='row'></div>
 					<div class='sixteen wide column'>
 						<div class='ui grey inverted segment'>
-							<i class='warning circle icon'></i>No schedules to display.
+							<center><h3><i class='warning circle icon'></i>No schedules to display.</h3></center>
 						</div>
 					</div>
 				</div>
@@ -351,16 +319,17 @@ function displaySched($event)
 		$cnt=mysqli_num_rows($run_query);
 		if($cnt!=0){
 			echo 
-			'<table class="ui teal inverted large table">
+			'
+			<table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
 				<thead>
-					<th class="two wide">Service</th>
-					<th class="two wide">Schedule</th>
-					<th class="two wide">Day</th>
-					<th class="seven wide">Church</th>
-					<th>Address</th>
+					<tr>
+						<th>SERVICE</th>
+						<th>SCHEDULE</th>
+						<th>DAY</th>
+						<th>CHURCH</th>
+						<th>ADDRESS</th>
+					</tr>
 				</thead>
-			</table>
-			<table class="ui very basic striped large table">
 				<tbody>
 			';
 
@@ -373,10 +342,10 @@ function displaySched($event)
 				
 				echo "
 				<tr>
-					<td class='two wide'>$event</td>
-					<td class='two wide'>$time</td>
-					<td class='two wide'>$day</td>
-					<td class='seven wide'>$church</td>
+					<td>$event</td>
+					<td>$time</td>
+					<td>$day</td>
+					<td>$church</td>
 					<td>$address</td>
 				</tr> ";
 		    }
@@ -384,7 +353,14 @@ function displaySched($event)
 				</table> <!-- table -->
 				<button class="ui basic icon button" value="View More" onclick="open_services()" name="">View More</button>';
 		}else{
-			echo "<i class='warning circle icon'></i>No schedules to display.";
+			echo "<div class='ui grid'>
+					<div class='row'></div>
+					<div class='sixteen wide column'>
+						<div class='ui grey inverted segment'>
+							<center><h3><i class='warning circle icon'></i>No schedules to display.</h3></center>
+						</div>
+					</div>
+				</div>";
 		}
  
      }
@@ -414,19 +390,20 @@ function displayAllServices()
 
 		if($cnt!=0){
 			echo 
-			'<table class="ui teal inverted large table">
+			'
+				<table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
 				<thead>
-					<th class="one wide">Service</th>
-					<th class="three wide">Church</th>
-					<th class="three wide">Address</th>
-					<th class="one wide">Start Time</th>
-					<th class="one wide">End Time</th>
-					<th class="one wide">Day</th>
-					<th class="one wide">Week</th>
-					<th class="two wide">Contact Number</th>
+					<tr>
+						<th>SERVICE</th>
+						<th>CHURCH</th>
+						<th>ADDRESS</th>
+						<th>START TIME</th>
+						<th>END TIME</th>
+						<th>DAY</th>
+						<th>WEEK</th>
+						<th>CONTACT NUMBER</th>
+					</tr>
 				</thead>
-			</table>
-			<table class="ui very basic striped large table">
 				<tbody>
 			';
 			while ($row_query = mysqli_fetch_array($run_query)) {
@@ -447,20 +424,27 @@ function displayAllServices()
 	            
 				echo "
 				<tr>
-					<td class='one wide'>$service</td>
-					<td class='three wide'>$church</td>
-					<td class='three wide'>$address</td>
-					<td class='one wide'>$stime</td>
-					<td class='one wide'>$etime</td>
-					<td class='one wide'>$day</td>
-					<td class='one wide'>$week</td>
-					<td class='two wide'>$contact</td>
+					<td>$service</td>
+					<td>$church</td>
+					<td>$address</td>
+					<td>$stime</td>
+					<td>$etime</td>
+					<td>$day</td>
+					<td>$week</td>
+					<td>$contact</td>
 				</tr> ";
 		    }
 		    echo '</tbody>
 				</table>';
 		}else{
-			echo "<i class='warning circle icon'></i>No schedules found.";
+			echo "<div class='ui grid'>
+					<div class='row'></div>
+					<div class='sixteen wide column'>
+						<div class='ui grey inverted segment'>
+							<center><h3><i class='warning circle icon'></i>No schedules to display.</h3></center>
+						</div>
+					</div>
+				</div>";
 		}
  
 	        
@@ -480,13 +464,14 @@ function displayAllServices()
 
         if($cnt !=0){
         	echo
-			'<table class="ui teal inverted large table">
+			'
+			<table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
 				<thead>
-					<th class="eight wide">CHURCH</th>
-					<th class="eight wide">ADDRESS</th>
+					<tr>
+						<th>CHURCH</th>
+						<th>ADDRESS</th>
+					</tr>
 				</thead>
-			</table>
-			<table class="ui very basic striped large table">
 				<tbody>
 			';
 	        while ($row_query = mysqli_fetch_array($result)) {
@@ -504,7 +489,14 @@ function displayAllServices()
 		    echo '</tbody>
 				</table>';
         }else{
-        	echo "<i class='warning circle icon'></i>No churches to display.";
+        	echo "<div class='ui grid'>
+					<div class='row'></div>
+					<div class='sixteen wide column'>
+						<div class='ui grey inverted segment'>
+							<center><h3><i class='warning circle icon'></i>No churches to display.</h3></center>
+						</div>
+					</div>
+				</div>";
         }
 	    
         
@@ -547,41 +539,41 @@ function displayAllServices()
     
  }
      
-     function displayChurchesHome()
-     {
-        global $mysqli;
+  //    function displayChurchesHome()
+  //    {
+  //       global $mysqli;
 
-        $query = "SELECT * FROM church WHERE church_status='active' LIMIT 5";
-        $run_query = mysqli_query($mysqli,$query);
+  //       $query = "SELECT * FROM church WHERE church_status='active' LIMIT 5";
+  //       $run_query = mysqli_query($mysqli,$query);
 
-		$cnt=mysqli_num_rows($run_query);
+		// $cnt=mysqli_num_rows($run_query);
 
-		if($cnt > 0){
-			echo '<table class="ui fixed very basic mobile tablet small monitor stackable table">
-								<thead>
-									<tr>
-										<th class="eight wide">Church Name</th>
-										<th class="eight wide">Address</th>
-									</tr>
-								</thead>
-								<tbody>';
-			while ($row_query = mysqli_fetch_array($run_query)) {
-	        	$id = $row_query['church_id'];
-				$church = $row_query['church_name'];
-				$address = $row_query['church_address'];
+		// if($cnt > 0){
+		// 	echo '<table class="ui fixed very basic mobile tablet small monitor stackable table">
+		// 						<thead>
+		// 							<tr>
+		// 								<th class="eight wide">Church Name</th>
+		// 								<th class="eight wide">Address</th>
+		// 							</tr>
+		// 						</thead>
+		// 						<tbody>';
+		// 	while ($row_query = mysqli_fetch_array($run_query)) {
+	 //        	$id = $row_query['church_id'];
+		// 		$church = $row_query['church_name'];
+		// 		$address = $row_query['church_address'];
 				
-				echo "
-				<tr class='clickable-row' onclick='open_info($id);'>
-					<td>$church</td>
-					<td>$address</td>
-				</tr> ";
-		    }
-		    echo '</tbody>
-							</table>';
-		}else{
-			echo '<i class="warning circle icon"></i>No church to display.';
-		}
-     }
+		// 		echo "
+		// 		<tr class='clickable-row' onclick='open_info($id);'>
+		// 			<td>$church</td>
+		// 			<td>$address</td>
+		// 		</tr> ";
+		//     }
+		//     echo '</tbody>
+		// 					</table>';
+		// }else{
+		// 	echo '<i class="warning circle icon"></i>No church to display.';
+		// }
+  //    }
 
      function search($event,$option1,$option2,$option3){
 			global $mysqli;
@@ -626,12 +618,12 @@ function displayAllServices()
 				<table class='ui fixed very basic mobile tablet small monitor only stackable celled padded striped table'>
 					<thead>
 						<tr>
-							<th>Church Name</th>
-							<th>Address</th>
-							<th>Start Time</th>
-							<th>End Time</th>
-							<th>Day/Week</th>
-							<th>Contact Number</th>
+							<th>CHURCH NAME</th>
+							<th>ADDRESS</th>
+							<th>START TIME</th>
+							<th>END TIME</th>
+							<th>DAY/WEEK</th>
+							<th>CONTACT NUMBER</th>
 						</tr>
 					</thead>
 					<tbody>";
@@ -660,7 +652,14 @@ function displayAllServices()
 						</table>
 					";    
 	    }else{
-	    	$output.= "<i class='warning circle icon'></i>No results found.";
+	    	$output.= "<div class='ui grid'>
+					<div class='row'></div>
+					<div class='sixteen wide column'>
+						<div class='ui grey inverted segment'>
+							<center><h3><i class='warning circle icon'></i>No results found.</h3></center>
+						</div>
+					</div>
+				</div>";
 	    }
 		 
 		 echo $output; 	
@@ -711,11 +710,16 @@ function displayAllServices()
 			    $output .="</tbody>
 						</table>";    
 	    }else{
-	    	$output.= "<i class='warning circle icon'></i>No results found.";
+	    	$output.= "<div class='ui grid'>
+					<div class='row'></div>
+					<div class='sixteen wide column'>
+						<div class='ui grey inverted segment'>
+							<center><h3><i class='warning circle icon'></i>No results found.</h3></center>
+						</div>
+					</div>
+				</div>";
 	    }
-		 
-		 echo $output;
-		 echo "</div> <br>"; 	
+	
     }
 function searchAllService($search){
 	global $mysqli;
@@ -736,14 +740,14 @@ function searchAllService($search){
 			<table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
 				<thead>
 					<tr>
-						<th>Service</th>
-						<th>Church</th>
-						<th>Address</th>
-						<th>Start Time</th>
-						<th>End Time</th>
-						<th>Day</th>
-						<th>Week</th>
-						<th>Contact Number</th>
+						<th>SERVICE</th>
+						<th>CHURCH</th>
+						<th>ADDRESS</th>
+						<th>START TIME</th>
+						<th>END TIME</th>
+						<th>DAY</th>
+						<th>WEEK</th>
+						<th>CONTACT NUMBER</th>
 					</tr>
 				</thead>
 				<tbody>';
@@ -778,7 +782,14 @@ function searchAllService($search){
 	    $output .='</tbody>
 			</table>';
 	}else{
-		$output .= "<i class='warning circle icon'></i>No schedules found.";
+		$output .= "<div class='ui grid'>
+					<div class='row'></div>
+					<div class='sixteen wide column'>
+						<div class='ui grey inverted segment'>
+							<center><h3><i class='warning circle icon'></i>No schedules to found.</h3></center>
+						</div>
+					</div>
+				</div>";
 	}
  
 
@@ -836,10 +847,10 @@ function masssearch($option1,$option2,$option3,$option4){
     	$output.=' <table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
 			<thead>
 				<tr>
-					<th>Church Name</th>
-					<th>Address</th>
-					<th>Time</th>
-					<th>Day/Week</th>
+					<th>CHURCH NAME</th>
+					<th>ADDRESS</th>
+					<th>TIME</th>
+					<th>DAY/WEEK</th>
 				</tr>
 			</thead>
 			<tbody>';
@@ -862,7 +873,14 @@ function masssearch($option1,$option2,$option3,$option4){
 				</table>
 			";
     }else{
-    	$output.= "<i class='warning circle icon'></i>No results found.";
+    	$output.= "<div class='ui grid'>
+					<div class='row'></div>
+					<div class='sixteen wide column'>
+						<div class='ui grey inverted segment'>
+							<center><h3><i class='warning circle icon'></i>No results found.</h3></center>
+						</div>
+					</div>
+				</div>";
     }
 
     echo $output;
@@ -957,16 +975,19 @@ function searchpages($option1,$option2,$option3, $option4,$option5,$url,$table,$
 	$npage = $cnt/10;
     $npage = ceil($npage);
 
+
+
+    echo "<div class='ui grid'><div class='six wide center aligned column'>";
     $page = $_GET['page'];
     if($npage ==0){
     	echo "Page <strong> ".$page." </strong> out of 1 pages" ;
     }else{
     	echo "Page <strong> ".$page." </strong> out of ".$npage." pages" ;
     }
-	
+	echo "</div>";
 
-    echo' <div class="ui centered grid">
-				<div class="ui center aligned pagination menu" > ';
+    echo' <div class="six wide right aligned column">
+			<div class="ui pagination menu" > ';
     if($cnt == 0){
     	echo "<a href = '".$url."?page=1' class='item'>1</a>";
     }else{
@@ -975,7 +996,32 @@ function searchpages($option1,$option2,$option3, $option4,$option5,$url,$table,$
 			echo "<a href = '".$url."?option1=".$option1."&option2=".$option2."&option3=".$option3."&option4=".$option4."&option5=".$option5."&page=".$n."' class='item'>".$n."</a>";
 		}
     }
-    echo "</div></div>";
+    echo "</div>
+    	</div></div>";
+
+
+
+
+
+  //   $page = $_GET['page'];
+  //   if($npage ==0){
+  //   	echo "Page <strong> ".$page." </strong> out of 1 pages" ;
+  //   }else{
+  //   	echo "Page <strong> ".$page." </strong> out of ".$npage." pages" ;
+  //   }
+	
+
+  //   echo' <div class="ui centered grid">
+		// 		<div class="ui center aligned pagination menu" > ';
+  //   if($cnt == 0){
+  //   	echo "<a href = '".$url."?page=1' class='item'>1</a>";
+  //   }else{
+    	
+  //   	for($n=1; $n<=$npage; $n++){
+		// 	echo "<a href = '".$url."?option1=".$option1."&option2=".$option2."&option3=".$option3."&option4=".$option4."&option5=".$option5."&page=".$n."' class='item'>".$n."</a>";
+		// }
+  //   }
+  //   echo "</div></div>";
 	    	
 }
 
@@ -995,9 +1041,10 @@ function churchinfo(){
 	$address = $row_church['church_address'];
 	$church_info = $row_church['church_info'];
 	
-	echo '<div class="ui primary padded container black segment">
+	echo '	
 			<h2 class="ui header">'.$church.'</h2>
 			<div class="ui divider"></div>'.$church_info.'
+			<div class="ui hidden divider"></div>
 			<h5 class="ui header">Address: <strong>'.$address.'</strong></h5>';
             
 			
@@ -1016,9 +1063,10 @@ function churchinfo(){
     }
    
     echo'
+
 	<h5 class="ui header">Contact Person: <strong>'.$name.'</strong></h5>
 	<h5 class="ui header">Contact Number: <strong>'.$contact.'</strong></h5>
-	</div> <!-- segment -->
+
 			';
   }
 
