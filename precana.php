@@ -66,7 +66,7 @@
 						</div>
 						<div class="field">
 							<select class="ui search dropdown" id="option3">
-								<option value="">Time</option>
+								<option value="">Start Time</option>
 								<?php echo timelist(); ?>
 								
 							</select>
