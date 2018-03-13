@@ -262,7 +262,7 @@ $church = $row_query['church_name'];
 $address = $row_query['church_address'];
 $info = $row_query['church_info'];
 echo"
-<form class='ui form' method='POST' action='churches.php?page=1&cid=".$id."'>
+<form class='ui form' method='POST' action='index.php?cid=".$id."'>
 <div class='ui attached fluid  basic blue segment'>
 				<div class='two fields'>
 					<div class='field'>

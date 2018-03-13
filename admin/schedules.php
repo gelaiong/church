@@ -23,7 +23,7 @@
 <div class="ui basic bottom attached segment">
 	<div class="ui large left vertical visible sidebar inverted borderless small menu" style="box-shadow: none !important;">
 		<div class="item" id="slogo">
-			<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
+			<a class="logo" href="index.php" ><img src="../img/logo.png"></a>
 		</div>
 		<div class="item">
 			<center><h4>ADMINISTRATOR</h4></center>
