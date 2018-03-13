@@ -1,4 +1,7 @@
-<?php include("functions.php"); ?>
+<?php 
+include("functions.php"); 
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,14 +17,14 @@
 		<div class="item" id="logo">
 			<a class="logo" href="home.php"><img src="img/logo.png"></a>
 		</div> <!-- logo -->
-		<a href="home.php" class="item">HOME</a>
+		<a href="home.php?page=1" class="item">HOME</a>
 		<a href="churches.php?page=1" class="item">CHURCHES</a>
 		<div class="ui dropdown item services" >
 			<a id="services">SERVICES</a>
 			<i class="dropdown icon"></i>
 			<div class="menu">
 				<a href="baptism.php?page=1" class="item">Baptism Schedule</a>
-				<a href="confession.php?page=1" class="item">Confession Schedule</a>
+				<a href="confession.php?page=1" class="active item">Confession Schedule</a>
 				<a href="mass.php?page=1" class="item">Mass Schedule</a>
 				<a href="precana.php?page=1" class="item">Pre-Cana Schedule</a>
 				<a href="prejordan.php?page=1" class="item">Pre-Jordan Schedule</a>
@@ -31,8 +34,7 @@
 		<div class="right item">
 		</div> <!-- right item -->
 	</div> <!-- menu -->
-	<div class="results"></div> <!-- search results -->
-
+	
 	<div class="content" id="context">
 		<div class="ui grid">
 			<div class="row"></div>
@@ -41,43 +43,88 @@
 				<h1 class="ui grey dividing header">
 					<i class="calendar icon"></i> 
 					<div class="content">
-			           	OTHER CHURCH SERVICES
-		              <div class="sub header">List of other church services</div>
+			           	SERVICE SCHEDULES
+		              <div class="sub header">List of all service schedules</div>
 	            	</div>
             		<div class="two wide column"></div>
         		</h1> <!-- header --> 
-				<h3>SEARCH</h3>
-				<form class="ui form" method = "POST" action = "mass.php">
+        		<h3>SEARCH</h3>
+				<div class="ui form">
 					<div class="inline fields">
-						<div class="ui small icon input search">
-							<input type="text" class="search" name="search" id="search" placeholder="Search...">
+						<div class="field">
+							<select class="ui search dropdown"   id="option4">
+								<option value="">Service</option>
+								<option>Baptism</option>
+								<option>Confession</option>
+								<option>Mass</option>
+								<option>Pre-Cana</option>
+								<option>Pre-Jordan</option>
+								<option>Wedding</option>
+							</select> 
 						</div>
-						<button  type ="button" name = "searchbutton" id="searchbutton" class="searching circular ui basic icon button" onclick="open_search(); " onkeyup="open_search();"><i class="search link icon"></i></button>
+						<div class="field">
+							<select class="ui search dropdown" id="option2">
+								<option value="">Church</option>
+								<?php dropdownchurch(); ?>
+								<!--  -->
+							</select>
+						</div>
+						<div class="field">
+							<select class="ui search dropdown" id="option3">
+								<option value="">Address</option>
+								<?php dropdownaddress(); ?>
+								<!--  -->
+							</select>
+						</div>
+						<div class="field">
+							<select class="ui search dropdown" id="option4">
+								<option value="">Start Time</option>
+								<?php echo timelist(); ?>
+								
+							</select>
+						</div>
+						<button  type ="button" name = "searchbutton" id="searchbutton" class="searching circular ui basic icon button" onclick="open_search(); " ><i class="search link icon"></i></button>
 					</div>
-				</form>
+				</div>
 				<div class="ui hidden divider"></div>
-				<?php displayAllServices(); ?>
+				<?php 
+					$search = $_GET['search'];
+					searchAllService($search); 
+					
+				?>
 			</div>
 			<div class="column"></div>
 			<div class="row">
 				<div class="two wide column"></div>
-				<?php pages("services.php","schedule",""); ?>
+				<?php searchpages($search,"allserviceresults.php","schedule",""); ?>
 				<div class="two wide column"></div>
 			</div>
 		</div>
+		<!-- <div class="ui grid">
+			<div class="two wide column"></div>
+			<div class="two wide column"></div>
+			<div class="two wide column"></div>
+		</div> -->
 	</div> <!-- content -->
 </div>
-
 </body>
 </html>
 <script>
 
 function open_search(){
-	var search = $('#search').val();
-	var myURL = "allserviceresults.php?search="+ search+"&page=1";
+    var option1 = $('#option1').val().trim();
+    var option2 = $('#option2').val().trim();
+    var option3 = $('#option3').val().trim();
+    var option4 = "";
+    var option5 = "";
+    var event = "Confession";
+
+	var myURL = "allserviceresults.php?page=1&option1="+ option1+"&option2="+option2+"&option3="+option3+"&option4="+option4+"&option5="+option5+"&event="+event;
 	window.open(myURL, "_self");
 }
+
 $(document).ready(function(){
 	$('.ui.dropdown').dropdown();
-})
+
+});
 </script>

@@ -7,13 +7,15 @@
 <html>
 <head>
 	<title>Cebu Churches Services Schedule</title>
+
 	<link rel="stylesheet" type="text/css" href="../cstyle.css">	
 	<link rel="stylesheet" href="../semantic/semantic.min.css">
-	<script src="../jquery/jquery.min.js"></script>
-	<script src="../semantic/semantic.min.js"></script>
 	<script type="text/javascript" src = "../tinymce/js/jquery.min.js"></script>
     <script type="text/javascript" src = "../tinymce/js/tinymce/jquery.tinymce.min.js"></script>
     <script type="text/javascript" src = "../tinymce/js/tinymce/tinymce.min.js"></script>
+	<script src="../jquery/jquery.min.js"></script>
+	<script src="../semantic/semantic.min.js"></script>
+	
 </head>
 </head>
 <body style="background: #ededed;">
@@ -73,17 +75,15 @@
 <script>
   tinymce.init({
   selector: 'textarea',
-  height: 350,
+  height: 500,
   menubar: false,
   plugins: [
-    'advlist autolink lists link image charmap print preview anchor',
+    'advlist autolink lists link image charmap print preview anchor textcolor',
     'searchreplace visualblocks code fullscreen',
-    'insertdatetime media table contextmenu paste code jbimages'
+    'insertdatetime media table contextmenu paste code help wordcount'
   ],
-  toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | jbimages',   
-  relative_urls : false, 
-  remove_script_host : false,
- 
+  toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+  
 });
 
 

@@ -87,9 +87,32 @@
 		</div>
 	</div>
 </div>
+<div class="ui mini modal" id="confirm">
+
+  <div class="header">Delete schedule</div>
+  <div class="content">
+    <p>Are you sure you want to delete this schedule?</p>
+  </div>
+  <div class="actions">
+  	<form method ='POST' action ='schedules.php?page=1'>
+	  	<div class="ui google plus button cancel">Cancel</div>
+	    <input type='submit' class="ui facebook button" name='del' value='Delete'>
+	    <input type='hidden' name='sid' value='' id='sid'/>
+	</form>
+  </div>
+</div>
 </body>
 </html>
 <script>
+$(document).ready(function(){
+	$('.delete').click(function(){
+		$('#confirm').modal('show');
+		$('#sid').val($(this).data("id"));
+	});
+	$('.cancel').click(function(){
+		$('#confirm').modal('hide');
+	});
+})
 function sched_info(id){
 	var myURL = 'editschedule.php?sid='+ id ;
 	window.open(myURL, "_self");

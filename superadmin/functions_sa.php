@@ -118,13 +118,15 @@ function editAdminInfo(){
 		$church_id= $_POST['church'];
 		$name = $_POST['name'];
 		$contact = $_POST['contact'];
+		$address = $_POST['address'];
 
 
 		$query = "UPDATE admin SET admin_name='".$name."', admin_church_id='".$church_id."',admin_contact='".$contact."' WHERE admin_id = ".$aid;
 
-		 // print_r($query);
-
 		$result = mysqli_query($mysqli,$query);
+		$query1 = "UPDATE church SET church_address='".$address."' WHERE church_id = ".$church_id;
+
+		$result1 = mysqli_query($mysqli,$query1);
 		
 		if($result){
 	    	header('Location: admins.php?page=1');
@@ -155,7 +157,7 @@ function displayAdmins(){
 		$id = $row_query['account_id']; 
 		$aid = $row_query['admin_id'];
 		
-		echo "<form method='POST' action='admins.php?page=1'>
+		echo "
 		       <tr>
 		       		<td>$aid</td>
 					<td class='two wide'>$name</td>
@@ -164,18 +166,17 @@ function displayAdmins(){
 					<td class='four wide'>$address</td>
 					<td class='five wide'>
 						<a href = 'editadmin.php?aid=".$aid."' class='ui facebook button'><i class='pencil alternate icon'></i>Update<a>
-						<button class='ui google plus button' name='delete'><i class='ban icon'></i>Remove</button>
-						<input type='hidden' name = 'id' value = '$id' />
+						<a class='ui google plus button delete' name='delete' data-id='".$id."'><i class='ban icon'></i>Remove</a>
 					</td>
 				</tr>
-			  </form>";
+			  ";
     }
  }
 
 function updateDisplay(){
 	global $mysqli;
 
-	if(isset($_POST['delete'])){
+	if(isset($_POST['delAd'])){
 		$id = $_POST['id'];
 		$query = "UPDATE account SET account_status = 'inactive' WHERE account_id = $id";
 		mysqli_query($mysqli,$query);
@@ -212,6 +213,10 @@ function displayAdInfo(){
 			<select class='ui search dropdown' name='church'>
 						".selectChurch()."</select>
 		</div>
+		<div class='field'>
+			<label>Church Address</label>
+			<input type='text' name='address' value='$address'>
+		</div>
 			<a href='admins.php?page=1' class='ui google plus button'><i class='remove icon'></i>Cancel</a>
 			<button class='ui facebook button' name='up' type='submit'><i class='pencil icon'></i>Update</button>
 	</form>
@@ -227,27 +232,29 @@ function displayChurches()
     
     $page = ($n * 10)-10;
 
-    $query = "SELECT * FROM church WHERE church_status = 'active' LIMIT ".$page.",10";
+    $query = "SELECT * FROM church JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' LIMIT ".$page.",10";
     $run_query = mysqli_query($mysqli,$query);
 
     while ($row_query = mysqli_fetch_array($run_query)) {
 		$church = $row_query['church_name'];
 		$address = $row_query['church_address'];
 		$cid = $row_query['church_id'];
+		$contact = $row_query['admin_contact'];
+		$name = $row_query['admin_name'];
 		
-		echo " 	<form method='POST' action='churches.php?page=1'>
+		echo " 
 					<tr>
 						<td>$cid</td>
 						<td class='three wide'>$church</td>
 						<td class='three wide'>$address</td>
-						<td class='three wide'>--------</td>
-						<td class='two wide'>--------</td>
+						<td class='three wide'>$name</td>
+						<td class='two wide'>$contact</td>
 						<td class='seven wide'>
-							<button class='ui google plus button' id='delete'><i class='ban icon'></i>Remove</button>
+							<a class='ui google plus button delete' data-id='".$cid."'><i class='ban icon'></i>Remove</a>
 						</td>
 						<input type='hidden' name='cid' value='$cid'/>
 					</tr>
-				</form>";
+				";
     }
  }
 function editChurchInfo(){
