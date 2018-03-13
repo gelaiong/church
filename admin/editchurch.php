@@ -22,7 +22,7 @@
 	<div class="ui basic bottom attached segment">
 	<div class="ui large left vertical visible sidebar inverted borderless small menu" style="box-shadow: none !important;">
 		<div class="item" id="slogo">
-			<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
+			<a class="logo" href="index.php" ><img src="../img/logo.png"></a>
 		</div>
 		<div class="item">
 			<center><h4>ADMINISTRATOR</h4></center>
@@ -63,6 +63,7 @@
 								<button class="ui google plus button"><i class="remove icon"></i>Cancel</button>
 								<button class="ui facebook button" name="update"><i class="pencil icon"></i>Update</button>
 							</div>
+						</form>
 						</div>
 						<div class="column"></div>
 					</div>
@@ -75,15 +76,17 @@
 <script>
   tinymce.init({
   selector: 'textarea',
-  height: 500,
+  height: 350,
   menubar: false,
   plugins: [
-    'advlist autolink lists link image charmap print preview anchor textcolor',
+    'advlist autolink lists link image charmap print preview anchor',
     'searchreplace visualblocks code fullscreen',
-    'insertdatetime media table contextmenu paste code help wordcount'
+    'insertdatetime media table contextmenu paste code jbimages'
   ],
-  toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-  
+  toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | jbimages',   
+  relative_urls : false, 
+  remove_script_host : false,
+ 
 });
 
 
