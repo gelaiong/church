@@ -85,6 +85,11 @@
 				<div class="two wide column"></div>
 			</div>
 		</div>
+		<div class="ui grid">
+			<div class="two wide column"></div>
+			<div class="two wide column"></div>
+			<div class="two wide column"></div>
+		</div>
 	</div> <!-- content -->
 </div>
 

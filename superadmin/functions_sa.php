@@ -7,7 +7,7 @@
 	{
 		session_start();
 
-	    if(isset($_SESSION['username'])==""){
+	    if(isset($_SESSION['username'])==""){ 
 	        header("location:../login.php");
 	    }
 	}
@@ -152,17 +152,17 @@ function displayAdmins(){
 		$address = $row_query['church_address'];
 		$contact =  $row_query['admin_contact'];
 		$name =  $row_query['admin_name'];
-		$id = $row_query['account_id'];
+		$id = $row_query['account_id']; 
 		$aid = $row_query['admin_id'];
 		
 		echo "<form method='POST' action='admins.php?page=1'>
 		       <tr>
 		       		<td>$aid</td>
-					<td class='three wide'>$name</td>
+					<td class='two wide'>$name</td>
 					<td class='two wide'>$contact</td>
 					<td class='three wide'>$church</td>
-					<td class='three wide'>$address</td>
-					<td>
+					<td class='four wide'>$address</td>
+					<td class='five wide'>
 						<a href = 'editadmin.php?aid=".$aid."' class='ui facebook button'><i class='pencil alternate icon'></i>Update<a>
 						<button class='ui google plus button' name='delete'><i class='ban icon'></i>Remove</button>
 						<input type='hidden' name = 'id' value = '$id' />
@@ -199,33 +199,22 @@ function displayAdInfo(){
 
 	echo "
 	<form class='ui form' action='editadmin.php?aid=".$id."' method='POST'>
-	<div class='ui attached fluid  basic blue segment'>
-			<div class='two fields'>
-				<div class='field'>
-					<label>Admin Name</label>
-					<input type='text' name='name' value='$name'>
-				</div>
-				<div class='field'>
-					<label>Contact Number</label>
-					<input type='text' name='contact' value ='$contact'>
-				</div>
-			</div>
-			<div class='two fields'>
-				<div class='field'>
-					<label>Church Name</label>
-					<select class='ui search dropdown' name='church'>
-						".selectChurch()."
-					</select>
-				</div>
-				
-			</div>
+		<div class='field'>
+			<label>Admin Name</label>
+			<input type='text' name='name' value='$name'>
 		</div>
-		<div class='ui error message'></div>
-		<div class='ui two bottom attached buttons'>
-			<a href='admins.php?page=1' class='ui basic labeled red icon button'><i class='remove icon'></i>Cancel</a>
-			<button class='ui basic labeled green icon button' name='up' type='submit'><i class='pencil icon'></i>Update</button>
+		<div class='field'>
+			<label>Contact Number</label>
+			<input type='text' name='contact' value ='$contact'>
 		</div>
-		</form>
+		<div class='field'>
+			<label>Church Name</label>
+			<select class='ui search dropdown' name='church'>
+						".selectChurch()."</select>
+		</div>
+			<a href='admins.php?page=1' class='ui google plus button'><i class='remove icon'></i>Cancel</a>
+			<button class='ui facebook button' name='up' type='submit'><i class='pencil icon'></i>Update</button>
+	</form>
 	";
 
 }
@@ -254,7 +243,7 @@ function displayChurches()
 						<td class='three wide'>--------</td>
 						<td class='two wide'>--------</td>
 						<td class='seven wide'>
-							<button class='ui google plus button' name='del'><i class='ban icon'></i>Remove</button>
+							<button class='ui google plus button' id='delete'><i class='ban icon'></i>Remove</button>
 						</td>
 						<input type='hidden' name='cid' value='$cid'/>
 					</tr>

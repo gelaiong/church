@@ -9,7 +9,7 @@
 	<script src="jquery/jquery.min.js"></script>
 	<script src="semantic/semantic.min.js"></script>
 </head>
-<body>
+<body>  
 <div class="container" id="container">
 		<div class="ui attached secondary pointing stackable sticky mobile tablet menu" id="menu">
 		<div class="item" id="logo">
@@ -32,30 +32,25 @@
 		<div class="right item">
 		</div> <!-- right item -->
 	</div> <!-- menu -->
-	<div class="results"></div> <!-- search results -->
+
 	<div class="content" id="context">
-		<div class="ui container" id="content">
-			<div class="ui stackable two column grid">
-				<div class="column">
-					<h1 class="ui header">
-						<!-- <i class="circular calendar icon"></i> -->
-						<div class="content">
-							Church Information
-							<!-- <div class="sub header">List of Schedules</div> -->
-						</div>
-					</h1>
-					<div class="ui breadcrumb">
-						<a class="section" href="home.php">Home</a>
-						<i class="right chevron icon divider"></i>
-						<a class="section" href="churches.php?page=1">Churches</a>
-						<i class="right chevron icon divider"></i>
-						<div class="active section">View church info</div>
-					</div>
-				</div>
+		<div class="ui grid">
+			<div class="row"></div>
+			<div class="column"></div>
+			<div class="fourteen wide column">
+				<h1 class="ui grey dividing header">
+					<img src="img/church.png" class="ui huge image">
+					<div class="content">
+			           	CHURCH INFORMATION
+		              <div class="sub header">Displays the church information</div>
+	            	</div>
+            		<div class="two wide column"></div>
+        		</h1>
+				<div class="ui hidden divider"></div>
+				<?php churchinfo(); ?>
 			</div>
-			         <?php churchinfo(); ?>
-			</div> <!-- segment -->
-		</div> <!-- container -->
+			<div class="column"></div>
+		</div>
 	</div> <!-- content -->
 </div>
 </body>

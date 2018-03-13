@@ -13,45 +13,52 @@
 	<script src="../jquery/jquery.min.js"></script>
 	<script src="../semantic/semantic.min.js"></script>
 </head>
-<body>
-<div class="ui top attached borderless menu">
-	<div class="right menu">
-		<div class="ui dropdown item">
-			Settings
-			<i class="dropdown icon"></i>
-			<div class="menu">
-				<a class="item" href="#"><i class="user icon"></i>Manage account</a>
-				<a class="item" href="../logout.php"><i class="sign out icon"></i>Log out</a>
-			</div>
+<body style="background: #ededed;">
+<div class="ui basic bottom attached segment">
+	<div class="ui large left vertical visible sidebar inverted borderless small menu" style="box-shadow: none !important;">
+		<div class="item" id="slogo">
+			<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
 		</div>
-		<!-- <a class="item"><i class="sign out icon"></i>Log out</a> -->
+		<div class="item">
+			<center><h4>ADMINISTRATOR</h4></center>
+		</div>
+		<a href="index.php" class="item" ><i class="home left icon"></i>Home</a>
+		<a href="schedules.php?page=1" class="item"><i class="calendar icon"></i>Schedules</a>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<?php 
+		    $id = $_SESSION['account_id'];
+			echo '
+			<a href="manageaccount.php?aid='.$id.'" class="active item" style="background: #ededed; color: black !important;"><i class="pencil alternative icon"></i>Edit Profile</a>
+			<a href="../logout.php" class="item"><i class="sign out icon"></i>Logout</a>';
+		?>
 	</div>
-</div>
-<div class="ui left visible vertical sidebar menu">
-	<div class="item" id="slogo">
-		<a class="logo" href="index.php" ><img src="../img/logo.png"></a>
-	</div>
-	<a class="item" href="index.php"><i class="home icon"></i>Home</a>
-	<a class="item" href="schedules.php?page=1"><i class="calendar icon"></i>Schedules</a>
-</div>
-<div class="pusher">
-	<div class="content" id="content">
-		<div class="ui stackable two column grid">
-			<div class="column">
-				<h1 class="ui header">
-					<i class="circular user icon"></i>
-					<div class="content">
-						Account
-						<div class="sub header">Manage Account</div>
+	<div class="pusher" style="max-width: 79% !important;">
+		<div class="ui breadcrumb">
+			<div class="divider"> <i class="right chevron icon"></i> </div>
+			<a href="index.php" class="section">Home</a>
+			<div class="divider"> / </div>
+			<div class="active section">Profile</div>
+		</div>
+		<div class="ui hidden divider"></div>
+		<div class="container">
+			<div class="ui segments">
+				<div class="ui segment">
+					<h3 class="ui header">EDIT PROFILE</h3>
+				</div>
+				<div class="ui padded segment">
+					<div class="ui center aligned grid">
+						<div class="column"></div>
+						<div class="fourteen wide left aligned middle aligned column">
+							<?php accinfo(); ?>
+						</div>
+						<div class="column"></div>
 					</div>
-				</h1>
-				<div class="ui breadcrumb"></div>
+				</div>
 			</div>
-			<div class="middle aligned column"></div>
 		</div>
-		
-		<?php accinfo(); ?>
-		
 	</div>
 </div>
 </body>

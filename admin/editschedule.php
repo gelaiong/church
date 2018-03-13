@@ -12,67 +12,64 @@
 	<script src="../jquery/jquery.min.js"></script>
 	<script src="../semantic/semantic.min.js"></script>
 </head>
-<body>
-<div class="ui top attached borderless menu">
-	<div class="right menu">
-		<div class="ui dropdown item">
-			Settings
-			<i class="dropdown icon"></i>
-			<div class="menu">
-				<a class="item" href="manageaccount.php"><i class="user icon"></i>Manage account</a>
-				<a class="item" href="../logout.php"><i class="sign out icon"></i>Log out</a>
-			</div>
+<body style="background: #ededed;">
+<div class="ui basic bottom attached segment">
+	<div class="ui large left vertical visible sidebar inverted borderless small menu" style="box-shadow: none !important;">
+		<div class="item" id="slogo">
+			<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
 		</div>
-		<!-- <a class="item"><i class="sign out icon"></i>Log out</a> -->
-	</div>
-</div>
-<div class="ui left visible vertical sidebar menu">
-	<div class="item" id="slogo">
-		<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
-	</div>
-	<a class="item" href="index.php"><i class="plus icon"></i>Church Info</a>
-	<a class="active item" href="schedules.php?page=1"><i class="calendar icon"></i>Schedules</a>
-</div>
-<div class="ui pusher">
-	<div class="content" id="content">
-		<div class="ui stackable two column grid">
-			<div class="column">
-				<h1 class="ui header">
-					<i class="circular pencil icon"></i>
-					<div class="content">
-						Schedules
-						<div class="sub header">Edit schedule</div>
-					</div>
-				</h1>
-				<div class="ui breadcrumb">
-					<a class="section" href="schedules.php?page=1">Schedules</a>
-					<i class="right chevron icon divider"></i>
-					<div class="active section">Edit schedule</div>
-				</div> <!-- ui breadcrumb -->
-			</div>
-			<div class="middle aligned column">
-			</div>
+		<div class="item">
+			<center><h4>ADMINISTRATOR</h4></center>
 		</div>
-		<div class="ui attached message">
-			<p>All fields are required.</p>
-		</div>
+		<a href="index.php" class="item" ><i class="home left icon"></i>Home</a>
+		<a href="schedules.php?page=1" class="active item" style="background: #ededed; color: black !important;"><i class="calendar icon"></i>Schedules</a>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
 		<?php 
-		$sid = $_GET['sid'];
+		    $id = $_SESSION['account_id'];
+			echo '
+			<a href="manageaccount.php?aid='.$id.'" class="item"><i class="pencil alternative icon"></i>Edit Profile</a>
+			<a href="../logout.php" class="item"><i class="sign out icon"></i>Logout</a>';
+		?>
+	</div>
+	<div class="pusher" style="max-width: 79% !important;">
+		<div class="ui breadcrumb">
+			<div class="divider"> <i class="right chevron icon"></i> </div>
+			<a href="index.php" class="section">Home</a>
+			<div class="divider"> / </div>
+			<div class="active section">Schedule Viewer</div>
+		</div>
+		<div class="ui hidden divider"></div>
+		<div class="container">
+			<div class="ui segments">
+				<div class="ui segment">
+					<h3 class="ui header">EDIT SCHEDULE</h3>
+				</div>
+				<div class="ui padded segment">
+					<div class="ui center aligned grid">
+						<div class="column"></div>
+						<div class="fourteen wide left aligned middle aligned column">
+							<?php 
+								$sid = $_GET['sid'];
 
-		echo "
+								echo "
+								<form class='ui form' action='schedules.php?page=1&sid=".$sid."' method='POST'>"; ?>
+									<?php displaySchedInfo(); ?>
 
-		<form class='ui form' action='schedules.php?page=1&sid=".$sid."' method='POST'>"; ?>
-			<div class="ui attached fluid  basic blue segment">
-				<?php displaySchedInfo(); ?>
-				
-			<div class="ui error message"></div>
-			<div class="ui two bottom attached buttons">
-				<button class="ui basic labeled red icon button"><i class="remove icon"></i>Cancel</button>
-				<button class="ui basic labeled green icon button" name="edit"><i class="plus icon"></i>Submit</button>
+									<button class="ui google plus button" style="float: left;"><i class="remove icon"></i>Cancel</button>
+									<button class="ui facebook button" name="edit" style="float: left;"><i class="plus icon"></i>Submit</button>
+								</form>
+						</div>
+						<div class="column"></div>
+					</div>
+				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 </div>
+
 </body>
 </html>
 <script>

@@ -31,62 +31,58 @@
 		<div class="right item">
 		</div> <!-- right item -->
 	</div> <!-- menu -->
-	<div class="content" id="context">
-		<!-- <div class="ui container" id="breadcrumbs">
-			<div class="ui breadcrumb">
-				<a class="section" href="home.php">Home</a>
-				<span class="divider">/</span>
-				<div class="active section">Churches</div>
-			</div>
-		</div> -->
-		<div class="results"></div> <!-- search results -->
-		<div class="ui container" id="content">
-			<div class="ui stackable two column grid">
-				<div class="column">
-					<h1 class="ui header">
-						<!-- <i class="circular calendar icon"></i> -->
-						<div class="content">
-							Church within Cebu Province
-							<!-- <div class="sub header">List of Schedules</div> -->
-						</div>
-					</h1>
-					<div class="ui breadcrumb">
-						<a class="section" href="home.php">Home</a>
-						<i class="right chevron icon divider"></i>
-						<div class="active section">Churches</div>
-					</div>
-				</div>
-				<div class="right aligned middle aligned column">
-					
 
-					<div class="field">
-						<select class="ui mini search dropdown" id="option1">
-							<option value="">Church</option>
-							<?php dropdownchurch(); ?>
-							<!--  -->
-						</select>
+	<div class="content" id="context">
+		<div class="ui grid">
+			<div class="row"></div>
+			<div class="column"></div>
+			<div class="fourteen wide column">
+				<h1 class="ui grey dividing header">
+					<i class="search icon"></i> 
+					<div class="content">
+			           	SEARCH RESULTS
+		              <div class="sub header">Showing church results</div>
+	            	</div>
+	        		<div class="two wide column"></div>
+	    		</h1> <!-- header --> 
+	    		<h3>SEARCH</h3>
+					<div class="ui form">
+						<div class="inline fields">
+							<div class="field">
+								<select class="ui search dropdown" id="option1">
+									<option value="">Church</option>
+									<?php dropdownchurch(); ?>
+									<!--  -->
+								</select>
+							</div>
+							<div class="field">
+								<select class="ui search dropdown" id="option2">
+									<option value="">Address</option>
+									<?php dropdownaddress(); ?>
+									<!--  -->
+								</select>
+							</div>
+							<div class="field">
+								<select class="ui search dropdown" id="option3">
+									<option value="">Time</option>
+									<?php echo timelist(); ?>
+									
+								</select>
+							</div>
+							<button  type ="button" name = "searchbutton" id="searchbutton" class="searching circular ui basic icon button" onclick="open_search(); " ><i class="search link icon"></i></button>
+						</div>
 					</div>
-					<div class="field">
-						<select class="ui mini search dropdown" id="option2">
-							<option value="">Address</option>
-							<?php dropdownaddress(); ?>
-							<!--  -->
-						</select>
-					</div>
-					<button  type ="button" name = "searchbutton" id="searchbutton" class="searching circular ui basic icon button" onclick="open_search(); " ><i class="search link icon"></i></button>
-				</div>
-			</div>
-			<div class="ui primary padded container black segment">
-				<?php 
+					<div class="ui hidden divider"></div>
+					<?php 
 					$option1 = $_GET['option1'];
 					$option2 = $_GET['option2'];
 					$page = $_GET['page'];
 					churchsearch($option1,$option2);
 					searchpages($option1,$option2,"","","","churchresult.php","church","",$page);
 				?>
-			</div> <!-- segment -->
-			<br>
-		</div> <!-- container -->
+				</div>
+			</div>
+		</div> <!-- grid -->
 	</div> <!-- content -->
 </div>
 </body>

@@ -12,59 +12,50 @@
 	<script src="../jquery/jquery.min.js"></script>
 	<script src="../semantic/semantic.min.js"></script>
 </head>
-<body>
-<div class="ui top attached borderless menu">
-	<!-- <div class="item" id="searchbar">
-		<div class="ui transparent icon input">
-			<input class="prompt" type="text" placeholder="Search admins ...">
-        	<i class="search link icon"></i>
+<body style="background: #ededed;">
+<div class="ui basic bottom attached segment">
+	<div class="ui large left vertical visible sidebar inverted borderless small menu" style="box-shadow: none !important;">
+		<div class="item" id="slogo">
+			<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
 		</div>
-	</div> -->
-	<div class="right menu">
-		<a class="item" href="../logout.php"><i class="sign out icon"></i>Log out</a>
+		<div class="item">
+			<center><h4>SUPERADMINISTRATOR</h4></center>
+		</div>
+		<a href="home.php" class=" item"><i class="home left icon"></i>Home</a>
+		<a href="churches.php?page=1" class=" item"><i class="plus icon"></i>Churches</a>
+		<a href="schedules.php?page=1" class="item"><i class="calendar icon"></i>Schedules</a>
+		<a href="admins.php?page=1" class="active item" style="background: #ededed; color: black !important;"><i class="user icon"></i>Administrators</a>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<div class="ui hidden divider"></div>
+		<a href="../logout.php" class="item"><i class="sign out icon"></i>Logout</a>
 	</div>
-</div>
-<div class="ui left visible vertical sidebar menu">
-	<div class="item" id="slogo">
-		<a class="logo" href="home.php" ><img src="../img/logo.png"></a>
-	</div>
-	<a class="item" href="home.php"><i class="home icon"></i>Home</a>
-	<a class="item" href="churches.php?page=1"><i class="plus icon"></i>Churches</a>
-	<a class="item" href="schedules.php?page=1"><i class="calendar icon"></i>Schedules</a>
-	<a class="active item" href="admins.php?page=1"><i class="user icon"></i>Admins</a>
-</div>
-<div class="ui pusher">
-	<div class="content" id="content">
-		<div class="ui stackable two column grid">
-			<div class="column">
-				<h1 class="ui header">
-					<i class="circular pencil icon"></i>
-					<div class="content">
-						Admins
-						<div class="sub header">Edit admin info</div>
+	<div class="pusher" style="max-width: 79% !important;">
+		<div class="ui breadcrumb" >
+			<div class="divider"> <i class="right chevron icon"></i> </div>
+			<a href="home.php" class="section">Home</a>
+			<div class="divider"> / </div>
+			<div class="active section">Account Management</div>
+		</div>
+		<div class="ui hidden divider"></div>
+		<div class="container">
+			<div class="ui segments">
+				<div class="ui segment">
+					<h3 class="ui header">EDIT ADMINISTRATOR</h3>
+				</div>
+				<div class="ui padded segment">
+					<?php displayAdInfo(); ?>
 					</div>
-				</h1>
-				<div class="ui breadcrumb">
-					<a class="section" href="admins.php?page=1">Admins</a>
-					<i class="right chevron icon divider"></i>
-					<div class="active section">Edit admin info</div>
-				</div> <!-- ui breadcrumb -->
-			</div>
-			<div class="middle aligned column">
-				<!-- <button class="ui right floated labeled blue icon button"><i class="plus icon"></i>Add schedule</button> -->
+				</div>
 			</div>
 		</div>
-		<div class="ui attached message">
-			<p>All fields are required.</p>
-		</div>
-			<?php displayAdInfo(); ?>
-		
 	</div>
 </div>
+
+
 
 </body>
-</html>
-
+<body>
 <script>
 $(document).ready(function(){
 	$('.ui.dropdown').dropdown();

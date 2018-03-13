@@ -33,13 +33,14 @@
 		<a href="../logout.php" class="item"><i class="sign out icon"></i>Logout</a>
 	</div>
 	<div class="pusher" style="max-width: 79% !important;">
-		<div class="ui breadcrumb" style="background: white; padding-top: 16px; padding-bottom: 16px; padding-left: 20px; margin-left: -22px; margin-top:-20px; padding-right: 81%; margin-right: -30px;">
+		<div class="ui breadcrumb">
 			<div class="divider"> <i class="right chevron icon"></i> </div>
 			<a href="home.php" class="section">Home</a>
 			<div class="divider"> / </div>
 			<div class="active section">Church Management</div>
 		</div>
 		<div class="ui hidden divider"></div>
+		
 		<div class="container">
 			<div class="ui segments">
 				<div class="ui segment">
@@ -48,7 +49,7 @@
 				<div class="ui segment">
 					<button onclick="window.open('addchurch.php','_self')" class="ui facebook button"><i class="add icon"></i>ADD CHURCH</button>
 					<table class="ui very basic padded table">
-						<thead>
+						<thead> 
 							<tr>
 								<th><h4 class="ui header">#</h4></th>
 								<th class="three wide"><h4 class="ui header">Name</h4></th>
@@ -76,10 +77,27 @@
 
 
 
+
+<div class="ui mini modal" id="confirm">
+  <div class="header">Delete church</div>
+  <div class="content">
+    <p>Are you sure you want to delete this church?</p>
+  </div>
+  <div class="actions">
+  	<div class="ui google plus button">Cancel</div>
+    <div class="ui facebook button" name='del'>Delete</div>
+  </div>
+</div>
+
 </body>
 </html>
 
 <script>
+$(document).ready(function(){
+	$('#delete').click(function(){
+		$('#confirm').modal('show');
+	})
+})
 function church_info(id){
 	var myURL = 'editchurch.php?cid='+ id ;
 	window.open(myURL, "_self");

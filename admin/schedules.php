@@ -28,7 +28,7 @@
 		<div class="item">
 			<center><h4>ADMINISTRATOR</h4></center>
 		</div>
-		<a href="home.php"><div class="item"><i class="home left icon"></i>Home</div></a>
+		<a href="index.php" class="item"><i class="home left icon"></i>Home</a>
 		<a href="schedules.php?page=1" class="active item" style="background: #ededed; color: black !important;"><i class="calendar icon"></i>Schedules</a>
 		<div class="ui hidden divider"></div>
 		<div class="ui hidden divider"></div>
@@ -42,7 +42,7 @@
 		?>
 	</div>
 	<div class="pusher" style="max-width: 79% !important;">
-		<div class="ui breadcrumb" style="background: white; padding-top: 16px; padding-bottom: 16px; padding-left: 20px; margin-left: -22px; margin-top:-20px; padding-right: 83.5%; margin-right: -25px;">
+		<div class="ui breadcrumb">
 			<div class="divider"> <i class="right chevron icon"></i> </div>
 			<a href="home.php" class="section">Home</a>
 			<div class="divider"> / </div>
@@ -64,13 +64,13 @@
 					<table class="ui very basic padded table">
 						<thead>
 							<tr>
-								<th><h4 class="ui header">Service</h4></th>
-								<th><h4 class="ui header">Specific Schedule</h4></th>
-								<th><h4 class="ui header">Start Time</h4></th>
-								<th><h4 class="ui header">End Time</h4></th>
-								<th><h4 class="ui header">Week</h4></th>
-								<th><h4 class="ui header">Day</h4></th>
-								<th><h4 class="ui header">Actions</h4></th>
+								<th class="one wide"><h4 class="ui header">Service</h4></th>
+								<th class="three wide"><h4 class="ui header">Specific Schedule</h4></th>
+								<th class="two wide"><h4 class="ui header">Start Time</h4></th>
+								<th class="two wide"><h4 class="ui header">End Time</h4></th>
+								<th class="two wide"><h4 class="ui header">Day</h4></th>
+								<th class="two wide"><h4 class="ui header">Week</h4></th>
+								<th class="six wide"><h4 class="ui header">Actions</h4></th>
 							</tr>
 						</thead>
 					</table>
