@@ -99,6 +99,7 @@
 												<option>3rd</option>
 												<option>4th</option>
 												<option>5th</option>
+												<option>Every Week</option>
 											</select>
 										</div>
 										<div class="field">

@@ -297,8 +297,9 @@ function displaySchedule()
 
     $n = $_GET['page'];
     $page = ($n * 10)-10;
+    $aid = $_SESSION['account_id'];
 
-	$query = "SELECT * FROM schedule JOIN church  ON church_id = schedule_church_id JOIN admin ON admin_church_id = church_id WHERE schedule_status = 'active' LIMIT ".$page.",10";
+	$query = "SELECT * FROM schedule JOIN church  ON church_id = schedule_church_id JOIN admin ON admin_church_id = church_id WHERE schedule_status = 'active' AND admin_account_id = ".$aid."  LIMIT ".$page.",10";
     $run_query = mysqli_query($mysqli,$query);
 
     while ($row_query = mysqli_fetch_array($run_query)) {
@@ -367,8 +368,8 @@ function displaySchedule()
 function pages($url,$table){
  	global $mysqli;
 
- 	
- 	$query = "SELECT * FROM ".$table." WHERE ".$table."_status='active'";
+ 	$aid = $_SESSION['account_id'];
+ 	$query = "SELECT * FROM ".$table." JOIN admin ON ".$table.".schedule_church_id = admin.admin_church_id WHERE ".$table."_status='active' AND admin_account_id = ".$aid."";
  	// print_r($query);
     
     $result = mysqli_query($mysqli,$query);
@@ -461,6 +462,8 @@ function displaySchedInfo(){
 							<option>2nd</option>
 							<option>3rd</option>
 							<option>4th</option>
+							<option>Every Week</option>
+												
 						</select>
 					</div> 
 					<div class='field'>
@@ -495,6 +498,7 @@ function displaySchedInfo(){
 							<option>2nd</option>
 							<option>3rd</option>
 							<option>4th</option>
+							<option>Every Week</option>
 						</select>
 					</div>
 					<div class='disabled field'>

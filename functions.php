@@ -21,7 +21,6 @@
 
 			echo 
 			'
-
 			<table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
 				<thead>
 					<tr>
@@ -87,7 +86,10 @@ function dropdownchurch()
 
 	while($row=mysqli_fetch_array($result)){
 		$name = $row['church_name'];
-		echo "<option value='".$name."'>".$name."</option>";
+		$cid = $row['church_id'];
+		echo "<option value='".$name."'>".$name."</option>
+			  ";
+
 	}
 }
 function login(){
@@ -112,6 +114,7 @@ function login(){
             		header("location:superadmin/home.php");
             	}
             }
+           
         }else{
             echo "<script>alert('Invalid Username or Password')</script>";
          }
@@ -122,12 +125,15 @@ function login(){
 function displaySched($event)
      {
         global $mysqli;
-
+        
+        $n = $_GET['page'];
+        
+        $page = ($n * 10)-10;
         $query = "SELECT *
         		  FROM schedule JOIN church 
         		  ON church_id = schedule_church_id JOIN admin 
         		  ON admin_church_id = church_id 
-        		  WHERE schedule_status = 'active' AND schedule_event = '$event' LIMIT 10";
+        		  WHERE schedule_status = 'active' AND schedule_event = '$event' LIMIT ".$page.",10";
         $run_query = mysqli_query($mysqli,$query);
 
 
@@ -508,7 +514,7 @@ function displayAllServices()
  	if($event == ""){
  		$query = "SELECT * FROM ".$table." WHERE ".$table."_status = 'active'";
  	}else{
- 		$query = "SELECT * FROM ".$table." WHERE ".$table."_status = 'active' AND schedule_event='".$event."'";
+ 		$query = "SELECT * FROM ".$table." WHERE schedule_status = 'active' AND schedule_event='".$event."'";
  	}
     
     $result = mysqli_query($mysqli,$query);
@@ -516,7 +522,7 @@ function displayAllServices()
     $npage = $cnt/10;
     $npage = ceil($npage);
 
-    echo "<div class='six wide left aligned column'>";
+    echo "<div class='two wide left aligned column'>";
     $page = $_GET['page'];
     if($npage ==0){
     	echo "Page <strong> ".$page." </strong> out of 1 pages" ;
@@ -525,14 +531,16 @@ function displayAllServices()
     }
 	echo "</div>";
 
-    echo' <div class="six wide right aligned column">
+    echo' <div class=" two wide right aligned column">
 			<div class="ui pagination menu" > ';
     if($cnt == 0){
     	echo "<a href = '".$url."?page=1' class='item'>1</a>";
     }else{
     	
     	for($n=1; $n<=$npage; $n++){
-			echo "<a href = '".$url."?page=".$n."' class='item'>".$n."</a>";
+    		
+    			echo "<a href = '".$url."?page=".$n."' class='item pitem'>".$n."</a>";
+    		
 		}
     }
     echo "</div>
@@ -583,7 +591,7 @@ function displayAllServices()
 		    $n = $_GET['page'];
     		$page = ($n * 10)-10;
 
-    		if($option1 != "" && $option2=="" && $option3==""){
+    		if($option1 != "" && $option2 !="" && $option3==""){
     			 $query = "SELECT * FROM schedule JOIN church 
         		  ON church_id = schedule_church_id JOIN admin 
         		  ON admin_church_id = church_id WHERE  schedule_status = 'active' AND schedule_event = '$event' AND church_name LIKE '%$option1%' LIMIT ".$page.",10";
@@ -607,7 +615,11 @@ function displayAllServices()
     			 $query = "SELECT * FROM schedule JOIN church 
         		  ON church_id = schedule_church_id JOIN admin 
         		  ON admin_church_id = church_id WHERE  schedule_status = 'active' AND schedule_event = '$event' AND church_name LIKE '%$option1%' AND church_address LIKE '%$option2%' AND schedule_starttime LIKE '%$option3%' LIMIT ".$page.",10";
-    		}
+    		}else{
+		    	$query = "SELECT * FROM schedule JOIN church 
+				  ON church_id = schedule_church_id JOIN admin ON church_id = admin_church_id WHERE schedule_status = 'active' ";
+		    }
+		   
 
 		     $result = mysqli_query($mysqli,$query) or die("nothing to display");
 		     $count = mysqli_num_rows($result);
@@ -721,16 +733,25 @@ function displayAllServices()
 	    }
 	    echo $output;
     }
-function searchAllService($search){
+function searchAllService($option1,$option2,$option3,$option4){
 	global $mysqli;
     $output = '';
    
     $n = $_GET['page'];
     $page = ($n * 10)-10;
-    $query = "SELECT * FROM schedule JOIN church 
-		  ON church_id = schedule_church_id JOIN admin ON church_id = admin_church_id WHERE schedule_status = 'active' AND church_name LIKE '%$search%' OR church_address LIKE '%$search%' OR schedule_day LIKE '%$search%' OR schedule_event LIKE '%$search%'  OR schedule_week LIKE '%$search%' LIMIT ".$page.",10";
+    if($option3=="" && $option1 != ""){
+		 $query = "SELECT * FROM church JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' AND church_name LIKE '%$option1%' LIMIT ".$page.",10";
+	}else if($option3 =="" && $option2 != ""){
+		$query = "SELECT * FROM church JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' AND church_address LIKE '%$option2%' LIMIT ".$page.",10";
+	}else if ($option3 =="" && $option1 == "" && $option2 == "" && $option4 != "" ) {
+		$query = "SELECT * FROM schedule JOIN church ON schedule_church_id = church_id JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' AND schedule_status = 'active' AND schedule_starttime LIKE '%$option4%' LIMIT ".$page.",10";
+	}else if ($option3 !="" && $option1 == "" && $option2 == "" && $option4 == "" ) {
+		$query = "SELECT * FROM schedule JOIN church ON schedule_church_id = church_id JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' AND schedule_status = 'active' AND schedule_event LIKE '%$option3%' LIMIT ".$page.",10";
+	}else{
+		$query = "SELECT * FROM schedule JOIN church ON schedule_church_id = church_id JOIN admin ON church_id = admin_church_id WHERE church_status = 'active'  AND schedule_status = 'active' AND schedule_event LIKE '%$option3%' OR church_name LIKE '%$option1%' OR church_address LIKE '%$option2%' OR schedule_starttime LIKE '%$option4%'LIMIT ".$page.",10";
+	}
 
-     $result = mysqli_query($mysqli,$query);
+    $result = mysqli_query($mysqli,$query);
   
 	$cnt=mysqli_num_rows($result);
 
@@ -802,7 +823,7 @@ function masssearch($option1,$option2,$option3,$option4){
     $output = '';
     $n = $_GET['page'];
     $page = ($n * 10)-10;
-    if($option1 != "" && $option2=="" && $option3=="" && $option4==""){
+    if($option1 != "" && $option2 !="" && $option3=="" && $option4==""){
     	$query = "SELECT * FROM schedule JOIN church 
 		  ON church_id = schedule_church_id WHERE schedule_status = 'active' AND  church_name LIKE '%$option1%' AND schedule_event = 'Mass' LIMIT ".$page.",10";
     }else if($option1 == "" && $option2 !="" && $option3=="" && $option4==""){
@@ -829,19 +850,15 @@ function masssearch($option1,$option2,$option3,$option4){
     }else if($option1 == "" && $option2 !="" && $option3 =="" && $option4 !=""){
     	$query = "SELECT * FROM schedule JOIN church 
 		  ON church_id = schedule_church_id WHERE schedule_status = 'active' AND church_address LIKE '%$option2%' AND schedule_day LIKE '%$option4%' AND schedule_event = 'Mass' LIMIT ".$page.",10";
+    }else{
+    	$query = "SELECT * FROM schedule JOIN church 
+		  ON church_id = schedule_church_id WHERE schedule_status = 'active' LIMIT ".$page.",10";
     }
 
-
-
-
-
-
-
-    // $query = "SELECT * FROM schedule JOIN church 
-		  // ON church_id = schedule_church_id WHERE schedule_status = 'active' AND (church_name LIKE '%$option1%' AND church_address LIKE '%$option2%' AND schedule_starttime LIKE '%$option3%' AND schedule_day LIKE '%$option4%') OR (church_name LIKE '%$option1%' OR church_address LIKE '%$option2%' OR schedule_starttime LIKE '%$option3%' OR schedule_day LIKE '%$option4%') AND schedule_event = 'Mass' LIMIT ".$page.",10";
-
-     $result = mysqli_query($mysqli,$query) or die("nothing to display");
-     $cnt = mysqli_num_rows($result);
+    
+     $result = mysqli_query($mysqli,$query);
+     if($result){
+     	$cnt = mysqli_num_rows($result);
 
     if($cnt > 0){
     	$output.=' <table class="ui fixed very basic mobile tablet small monitor only stackable celled padded striped table">
@@ -883,6 +900,8 @@ function masssearch($option1,$option2,$option3,$option4){
 				</div>";
     }
 
+     }
+     
     echo $output;
     echo "</div> <br>";
   
@@ -897,8 +916,17 @@ function searchpages($option1,$option2,$option3, $option4,$option5,$url,$table,$
 	if($event == ""){
 		//allservice
 		if($table == 'schedule'){
-			$query = "SELECT * FROM schedule JOIN church 
-			ON church_id = schedule_church_id JOIN admin ON church_id = admin_church_id WHERE schedule_status = 'active' AND  (church_name LIKE '%$option1%' AND church_address LIKE '%$option2%'AND schedule_day LIKE '%$option4%' AND schedule_week LIKE '%$option5%') OR church_name LIKE '%$option1%' OR church_address LIKE '%$option2%'OR schedule_day LIKE '%$option4%' OR schedule_week LIKE '%$option5%'";
+			if($option3=="" && $option1 != ""){
+				 $query = "SELECT * FROM church JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' AND church_name LIKE '%$option1%' LIMIT ".$page.",10";
+			}else if($option3 =="" && $option2 != ""){
+				$query = "SELECT * FROM church JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' AND church_address LIKE '%$option2%' LIMIT ".$page.",10";
+			}else if ($option3 =="" && $option1 == "" && $option2 == "" && $option4 != "" ) {
+				$query = "SELECT * FROM schedule JOIN church ON schedule_church_id = church_id JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' AND schedule_status = 'active' AND schedule_starttime LIKE '%$option4%' LIMIT ".$page.",10";
+			}else if ($option3 !="" && $option1 == "" && $option2 == "" && $option4 == "" ) {
+				$query = "SELECT * FROM schedule JOIN church ON schedule_church_id = church_id JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' AND schedule_status = 'active' AND schedule_event LIKE '%$option3%' LIMIT ".$page.",10";
+			}else{
+				$query = "SELECT * FROM schedule JOIN church ON schedule_church_id = church_id JOIN admin ON church_id = admin_church_id WHERE church_status = 'active'  AND schedule_status = 'active' AND schedule_event LIKE '%$option3%' OR church_name LIKE '%$option1%' OR church_address LIKE '%$option2%' OR schedule_starttime LIKE '%$option4%'LIMIT ".$page.",10";
+			}
 		}else{
 			 if($option1!="" && $option2 != ""){
     			 $query = "SELECT * FROM church WHERE church_status = 'active' AND church_name LIKE '%$option1%' AND church_address LIKE '%$option2%'LIMIT ".$page.",10";
@@ -912,7 +940,7 @@ function searchpages($option1,$option2,$option3, $option4,$option5,$url,$table,$
 		}
 		
 	}else if($event == "Mass"){
-		 if($option1 != "" && $option2=="" && $option3=="" && $option4==""){
+		 if($option1 != "" && $option2 !="" && $option3=="" && $option4==""){
 	    	$query = "SELECT * FROM schedule JOIN church 
 			  ON church_id = schedule_church_id WHERE schedule_status = 'active' AND  church_name LIKE '%$option1%' AND schedule_event = 'Mass' LIMIT ".$page.",10";
 	    }else if($option1 == "" && $option2 !="" && $option3=="" && $option4==""){
@@ -939,9 +967,12 @@ function searchpages($option1,$option2,$option3, $option4,$option5,$url,$table,$
 	    }else if($option1 == "" && $option2 !="" && $option3 =="" && $option4 !=""){
 	    	$query = "SELECT * FROM schedule JOIN church 
 			  ON church_id = schedule_church_id WHERE schedule_status = 'active' AND church_address LIKE '%$option2%' AND schedule_day LIKE '%$option4%' AND schedule_event = 'Mass' LIMIT ".$page.",10";
+	    }else{
+	    	$query = "SELECT * FROM schedule JOIN church 
+			  ON church_id = schedule_church_id WHERE schedule_status = 'active' ";
 	    }
 	}else{
-		if($option1 != "" && $option2=="" && $option3==""){
+		if($option1 != "" && $option2 !="" && $option3==""){
     			 $query = "SELECT * FROM schedule JOIN church 
         		  ON church_id = schedule_church_id JOIN admin 
         		  ON admin_church_id = church_id WHERE  schedule_status = 'active' AND schedule_event = '$event' AND church_name LIKE '%$option1%' LIMIT ".$page.",10";
@@ -965,13 +996,15 @@ function searchpages($option1,$option2,$option3, $option4,$option5,$url,$table,$
     			 $query = "SELECT * FROM schedule JOIN church 
         		  ON church_id = schedule_church_id JOIN admin 
         		  ON admin_church_id = church_id WHERE  schedule_status = 'active' AND schedule_event = '$event' AND church_name LIKE '%$option1%' AND church_address LIKE '%$option2%' AND schedule_starttime LIKE '%$option3%' LIMIT ".$page.",10";
-    		}
-
+    		}else{
+	    		$query = "SELECT * FROM schedule JOIN church 
+			  ON church_id = schedule_church_id WHERE schedule_status = 'active' ";
+	    	}
 	}
 
-
 	$result = mysqli_query($mysqli,$query);
-    $cnt = mysqli_num_rows($result);  
+	if($result){
+		$cnt = mysqli_num_rows($result);  
 	$npage = $cnt/10;
     $npage = ceil($npage);
 
@@ -999,30 +1032,7 @@ function searchpages($option1,$option2,$option3, $option4,$option5,$url,$table,$
     echo "</div>
     	</div></div>";
 
-
-
-
-
-  //   $page = $_GET['page'];
-  //   if($npage ==0){
-  //   	echo "Page <strong> ".$page." </strong> out of 1 pages" ;
-  //   }else{
-  //   	echo "Page <strong> ".$page." </strong> out of ".$npage." pages" ;
-  //   }
-	
-
-  //   echo' <div class="ui centered grid">
-		// 		<div class="ui center aligned pagination menu" > ';
-  //   if($cnt == 0){
-  //   	echo "<a href = '".$url."?page=1' class='item'>1</a>";
-  //   }else{
-    	
-  //   	for($n=1; $n<=$npage; $n++){
-		// 	echo "<a href = '".$url."?option1=".$option1."&option2=".$option2."&option3=".$option3."&option4=".$option4."&option5=".$option5."&page=".$n."' class='item'>".$n."</a>";
-		// }
-  //   }
-  //   echo "</div></div>";
-	    	
+	}    	
 }
 
 

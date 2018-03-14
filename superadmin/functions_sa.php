@@ -11,6 +11,27 @@
 	        header("location:../login.php");
 	    }
 	}
+
+	function adminCount(){
+		global $mysqli;
+
+		$query = "SELECT * FROM admin JOIN account ON account_id = admin_account_id WHERE account_status = 'active'"; 
+		$result = mysqli_query($mysqli,$query);
+		$cnt = mysqli_num_rows($result);
+
+		echo $cnt;
+
+	}
+	function churchCount(){
+		global $mysqli;
+
+		$query = "SELECT * FROM church WHERE church_status = 'active'"; 
+		$result = mysqli_query($mysqli,$query);
+		$cnt = mysqli_num_rows($result);
+
+		echo $cnt;
+
+	}
 	function addChurchInfo(){
 		global $mysqli;
 		if(isset($_POST['submit'])){ 
@@ -24,11 +45,11 @@
 		    $query = mysqli_query($mysqli,$get_query) ;   
 		}
 	}
-	function selectChurch(){
+	function selectChurch($cid){
 		global $mysqli;
 		$output = '';
 
-		$get_query = "SELECT * FROM church WHERE church_status='active'";
+		$get_query = "SELECT * FROM church LEFT JOIN admin ON admin_church_id = church_id WHERE admin_church_id IS NULL OR church_id = ".$cid."";
 		$run_query = mysqli_query($mysqli, $get_query);
 
 		while ($row_query = mysqli_fetch_array($run_query)) {
@@ -41,6 +62,25 @@
 
 	    return $output;
 	}
+
+	function selectChurchNoAdmin(){
+		global $mysqli;
+		$output = '';
+
+		$get_query = "SELECT * FROM church LEFT JOIN admin ON admin_church_id = church_id WHERE admin_church_id IS NULL";
+		$run_query = mysqli_query($mysqli, $get_query);
+
+		while ($row_query = mysqli_fetch_array($run_query)) {
+			$church = $row_query['church_name'];
+			$churchID = $row_query['church_id'];
+			
+			$output .= "<option value = '$churchID'>$church</option> ";
+
+	    }
+
+	    return $output;
+	}
+    
     
     function addAdmin(){
     	global $mysqli;
@@ -197,6 +237,7 @@ function displayAdInfo(){
 	$address = $row_query['church_address'];
 	$contact =  $row_query['admin_contact'];
 	$name =  $row_query['admin_name'];
+	$cid = $row_query['church_id'];
 
 	echo "
 	<form class='ui form' action='editadmin.php?aid=".$id."' method='POST'>
@@ -211,7 +252,7 @@ function displayAdInfo(){
 		<div class='field'>
 			<label>Church Name</label>
 			<select class='ui search dropdown' name='church'>
-						".selectChurch()."</select>
+						".selectChurch($cid)."</select>
 		</div>
 		<div class='field'>
 			<label>Church Address</label>
@@ -232,24 +273,24 @@ function displayChurches()
     
     $page = ($n * 10)-10;
 
-    $query = "SELECT * FROM church JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' LIMIT ".$page.",10";
+    // $query = "SELECT * FROM church JOIN admin ON church_id = admin_church_id WHERE church_status = 'active' LIMIT ".$page.",10";
+    $query = "SELECT * FROM church WHERE church_status = 'active' LIMIT ".$page.",10";
     $run_query = mysqli_query($mysqli,$query);
 
     while ($row_query = mysqli_fetch_array($run_query)) {
 		$church = $row_query['church_name'];
 		$address = $row_query['church_address'];
 		$cid = $row_query['church_id'];
-		$contact = $row_query['admin_contact'];
-		$name = $row_query['admin_name'];
-		
+		// $contact = $row_query['admin_contact'];
+		// $name = $row_query['admin_name'];
+
 		echo " 
 					<tr>
 						<td>$cid</td>
-						<td class='three wide'>$church</td>
-						<td class='three wide'>$address</td>
-						<td class='three wide'>$name</td>
-						<td class='two wide'>$contact</td>
-						<td class='seven wide'>
+						<td class='six wide'>$church</td>
+						<td class='six wide'>$address</td>
+						
+						<td class='three wide'>
 							<a class='ui google plus button delete' data-id='".$cid."'><i class='ban icon'></i>Remove</a>
 						</td>
 						<input type='hidden' name='cid' value='$cid'/>

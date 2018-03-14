@@ -52,7 +52,7 @@ include("functions.php");
 				<div class="ui form">
 					<div class="inline fields">
 						<div class="field">
-							<select class="ui search dropdown"   id="option4">
+							<select class="ui search dropdown"   id="option3">
 								<option value="">Service</option>
 								<option>Baptism</option>
 								<option>Confession</option>
@@ -63,14 +63,14 @@ include("functions.php");
 							</select> 
 						</div>
 						<div class="field">
-							<select class="ui search dropdown" id="option2">
+							<select class="ui search dropdown" id="option1">
 								<option value="">Church</option>
 								<?php dropdownchurch(); ?>
 								<!--  -->
 							</select>
 						</div>
 						<div class="field">
-							<select class="ui search dropdown" id="option3">
+							<select class="ui search dropdown" id="option2">
 								<option value="">Address</option>
 								<?php dropdownaddress(); ?>
 								<!--  -->
@@ -87,16 +87,12 @@ include("functions.php");
 					</div>
 				</div>
 				<div class="ui hidden divider"></div>
-				<?php 
-					$search = $_GET['search'];
-					searchAllService($search); 
-					
-				?>
+				<?php displayAllServices(); ?>
 			</div>
 			<div class="column"></div>
 			<div class="row">
-				<div class="two wide column"></div>
-				<?php searchpages($search,"allserviceresults.php","schedule",""); ?>
+				<div class="column"></div>
+				<?php pages("services.php","schedule",""); ?>
 				<div class="two wide column"></div>
 			</div>
 		</div>
@@ -115,9 +111,9 @@ function open_search(){
     var option1 = $('#option1').val().trim();
     var option2 = $('#option2').val().trim();
     var option3 = $('#option3').val().trim();
-    var option4 = "";
+    var option4 = $('#option4').val().trim();
     var option5 = "";
-    var event = "Confession";
+    var event = $('#option3').val().trim();
 
 	var myURL = "allserviceresults.php?page=1&option1="+ option1+"&option2="+option2+"&option3="+option3+"&option4="+option4+"&option5="+option5+"&event="+event;
 	window.open(myURL, "_self");
@@ -125,6 +121,40 @@ function open_search(){
 
 $(document).ready(function(){
 	$('.ui.dropdown').dropdown();
+	$('#option1').on('change',function(){
+
+		var church_name = $(this).val();
+		var dataSet = 'church='+church_name;
+		$.ajax({
+		type: 'POST',
+		url: 'address.php',
+		data: dataSet,
+		cache: false,
+		success: function(result){
+             $('#option2').html(result);
+          },
+          error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+          }
+	});
+	});
+	$('#option2').on('change',function(){
+
+		var church_address = $(this).val();
+		var dataSet = 'address='+church_address;
+		$.ajax({
+		type: 'POST',
+		url: 'address.php',
+		data: dataSet,
+		cache: false,
+		success: function(result){
+             $('#option1').html(result);
+          },
+          error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+          }
+	});
+	});
 
 });
 </script>

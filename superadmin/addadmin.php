@@ -69,7 +69,9 @@
 									<label>Church Name</label>
 									<select class="ui search dropdown" name="church">
 										<option value="">Select church name</option>
-										<?php echo selectChurch(); ?>
+										<?php 
+										echo selectChurchNoAdmin(); 
+										?>
 									</select>
 								</div>
 

@@ -79,7 +79,7 @@
 				</div>
 				<div class="column"></div>
 				<div class="row">
-					<div class="two wide column"></div>
+					<div class="column"></div>
 					<?php pages("prejordan.php","schedule","Pre-Jordan"); ?>
 					<div class="two wide column"></div>
 				</div>
@@ -108,5 +108,39 @@ function open_search(){
 }
 $(document).ready(function(){
 	$('.ui.dropdown').dropdown();
+	$('#option1').on('change',function(){
+
+		var church_name = $(this).val();
+		var dataSet = 'church='+church_name;
+		$.ajax({
+		type: 'POST',
+		url: 'address.php',
+		data: dataSet,
+		cache: false,
+		success: function(result){
+             $('#option2').html(result);
+          },
+          error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+          }
+	});
+	});
+	$('#option2').on('change',function(){
+
+		var church_address = $(this).val();
+		var dataSet = 'address='+church_address;
+		$.ajax({
+		type: 'POST',
+		url: 'address.php',
+		data: dataSet,
+		cache: false,
+		success: function(result){
+             $('#option1').html(result);
+          },
+          error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+          }
+	});
+	});
 })
 </script>

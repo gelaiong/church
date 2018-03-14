@@ -6,8 +6,6 @@
 	addMass();
 	addschedule();
 	editSchedule();
-	
-	
 ?>
 
 <!DOCTYPE html>

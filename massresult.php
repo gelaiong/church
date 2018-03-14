@@ -99,7 +99,7 @@ include("functions.php");
 			</div>
 			<div class="column"></div>
 			<div class="row">
-				<div class="two wide column"></div>
+				<div class="column"></div>
 				<?php searchpages($option1,$option2,$option3,$option4,"","massresult.php","schedule","Mass",$page); ?>
 				<div class="two wide column"></div>
 			</div>
@@ -115,10 +115,10 @@ include("functions.php");
 </html>
 <script>
 function open_search(){
-	var option1 = $('#option1').val();
-	var option2 = $('#option2').val();
-	var option3 = $('#option3').val();
-	var option4 = $('#option4').val();
+	var option1 = $('#option1').val().trim();
+	var option2 = $('#option2').val().trim();
+	var option3 = $('#option3').val().trim();
+	var option4 = $('#option4').val().trim();
 	var option5 = "";
 	var myURL = "massresult.php?page=1&option1="+ option1+"&option2="+option2+"&option3="+option3+"&option4="+option4+"&option5="+option5;
 	window.open(myURL, "_self");
@@ -126,5 +126,39 @@ function open_search(){
 
 $(document).ready(function(){
 	$('.ui.dropdown').dropdown();
+	$('#option1').on('change',function(){
+
+		var church_name = $(this).val();
+		var dataSet = 'church='+church_name;
+		$.ajax({
+		type: 'POST',
+		url: 'address.php',
+		data: dataSet,
+		cache: false,
+		success: function(result){
+             $('#option2').html(result);
+          },
+          error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+          }
+	});
+	});
+	$('#option2').on('change',function(){
+
+		var church_address = $(this).val();
+		var dataSet = 'address='+church_address;
+		$.ajax({
+		type: 'POST',
+		url: 'address.php',
+		data: dataSet,
+		cache: false,
+		success: function(result){
+             $('#option1').html(result);
+          },
+          error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+          }
+	});
+	});
 })
 </script>

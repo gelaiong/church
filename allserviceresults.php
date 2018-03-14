@@ -52,7 +52,7 @@ include("functions.php");
 				<div class="ui form">
 					<div class="inline fields">
 						<div class="field">
-							<select class="ui search dropdown"   id="option4">
+							<select class="ui search dropdown"   id="option3">
 								<option value="">Service</option>
 								<option>Baptism</option>
 								<option>Confession</option>
@@ -77,7 +77,7 @@ include("functions.php");
 							</select>
 						</div>
 						<div class="field">
-							<select class="ui search dropdown" id="option3">
+							<select class="ui search dropdown" id="option4">
 								<option value="">Start Time</option>
 								<?php echo timelist(); ?>
 								
@@ -87,12 +87,21 @@ include("functions.php");
 					</div>
 				</div>
 				<div class="ui hidden divider"></div>
-				<?php displayAllServices(); ?>
+				<?php 
+					$option1 = $_GET['option1'];
+					$option2 = $_GET['option2'];
+					$option3 = $_GET['option3'];
+					$option4 = $_GET['option4'];
+					$event = $_GET['event'];
+					$page = $_GET['page'];
+					searchAllService($option1,$option2,$option3,$option4);
+					
+				?>
 			</div>
 			<div class="column"></div>
 			<div class="row">
-				<div class="two wide column"></div>
-				<?php pages("confession.php","schedule","Confession"); ?>
+				<div class="column"></div>
+				<?php searchpages($option1,$option2,$option3,$option4,"","allserviceresults.php","schedule",$event,$page); ?>
 				<div class="two wide column"></div>
 			</div>
 		</div>
@@ -111,9 +120,9 @@ function open_search(){
     var option1 = $('#option1').val().trim();
     var option2 = $('#option2').val().trim();
     var option3 = $('#option3').val().trim();
-    var option4 = "";
+    var option4 = $('#option4').val().trim();;
     var option5 = "";
-    var event = "Confession";
+    var event = $('#option3').val().trim();
 
 	var myURL = "allserviceresults.php?page=1&option1="+ option1+"&option2="+option2+"&option3="+option3+"&option4="+option4+"&option5="+option5+"&event="+event;
 	window.open(myURL, "_self");
@@ -121,6 +130,40 @@ function open_search(){
 
 $(document).ready(function(){
 	$('.ui.dropdown').dropdown();
+	$('#option1').on('change',function(){
+
+		var church_name = $(this).val();
+		var dataSet = 'church='+church_name;
+		$.ajax({
+		type: 'POST',
+		url: 'address.php',
+		data: dataSet,
+		cache: false,
+		success: function(result){
+             $('#option2').html(result);
+          },
+          error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+          }
+	});
+	});
+	$('#option2').on('change',function(){
+
+		var church_address = $(this).val();
+		var dataSet = 'address='+church_address;
+		$.ajax({
+		type: 'POST',
+		url: 'address.php',
+		data: dataSet,
+		cache: false,
+		success: function(result){
+             $('#option1').html(result);
+          },
+          error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+          }
+	});
+	});
 
 });
 </script>

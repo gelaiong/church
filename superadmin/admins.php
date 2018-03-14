@@ -51,7 +51,7 @@
 						<thead>
 							<tr>
 								<th><h4 class="ui header">#</h4></th>
-								<th class="two wide"><h4 class="ui header">Admin Name</h4></th>
+								<th class="three wide"><h4 class="ui header">Admin Name</h4></th>
 								<th class="two wide"><h4 class="ui header">Contact #</h4></th>
 								<th class="three wide"><h4 class="ui header">Church Name</h4></th>
 								<th class="four wide"><h4 class="ui header">Address</h4></th>
@@ -65,7 +65,7 @@
 						</tbody>
 					</table>
 					<div class="ui hidden divider"></div>
-					<?php pages("schedules.php","schedule"); ?>
+					<?php pages("admins.php","admin"); ?>
 					<div class="ui hidden divider"></div>
 				</div>
 			</div>

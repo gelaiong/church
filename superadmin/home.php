@@ -42,13 +42,13 @@
 						<img src="../img/church.png" class="ui tiny centered image">
 					</div>
 					<div class="eight wide middle aligned left aligned column">
-						<p style="font-size: 3em; font-family: sans-serif;">10 CHURCHES</p>
+						<p style="font-size: 3em; font-family: sans-serif;"><?php churchCount(); ?> CHURCHES</p>
 					</div>
 					<div class="eight wide middle aligned aligned right aligned column">
 						<center><h1 class="ui grey header"><i class="user grey icon"></i></h1></center>
 					</div>
 					<div class="eight wide middle aligned left aligned column">
-						<p style="font-size: 3em; font-family: sans-serif;">10 ADMINS</p>
+						<p style="font-size: 3em; font-family: sans-serif;"><?php adminCount(); ?> ADMINS</p>
 					</div>
 				</div>
 			</div>

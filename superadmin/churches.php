@@ -51,12 +51,12 @@
 					<table class="ui very basic padded table">
 						<thead> 
 							<tr>
-								<th><h4 class="ui header">#</h4></th>
-								<th class="three wide"><h4 class="ui header">Name</h4></th>
-								<th class="three wide"><h4 class="ui header">Address</h4></th>
-								<th class="three wide"><h4 class="ui header">Contact Person</h4></th>
-								<th class="two wide"><h4 class="ui header">Contact #</h4></th>
-								<th class="seven wide"><h4 class="ui header">Actions</h4></th>
+								<th class><h4 class="ui header">#</h4></th>
+								<th class="six wide"><h4 class="ui header">Name</h4></th>
+								<th class="five wide"><h4 class="ui header">Address</h4></th>
+								<!-- <th class="three wide"><h4 class="ui header">Contact Person</h4></th>
+								<th class="two wide"><h4 class="ui header">Contact #</h4></th> -->
+								<th class="three wide"><h4 class="ui header">Actions</h4></th>
 							</tr>
 						</thead>
 					</table>

@@ -53,14 +53,14 @@
 				<form class="ui form" method = "POST" action = "churches.php">
 					<div class="inline fields">
 						<div class="field">
-							<select class="ui search dropdown" id="option1">
+							<select class="ui search dropdown" id="option1" name="option1">
 								<option value="">Church</option>
 								<?php dropdownchurch(); ?>
 								<!--  -->
 							</select>
 						</div>
 						<div class="field">
-							<select class="ui search dropdown" id="option2">
+							<select class="ui search dropdown" id="option2" name="option2">
 								<option value="">Address</option>
 								<?php dropdownaddress(); ?>
 								<!--  -->
@@ -102,5 +102,40 @@ function open_search(){
 }
 $(document).ready(function(){
 	$('.ui.dropdown').dropdown();
+	$('#option1').on('change',function(){
+
+		var church_name = $(this).val();
+		var dataSet = 'church='+church_name;
+		$.ajax({
+		type: 'POST',
+		url: 'address.php',
+		data: dataSet,
+		cache: false,
+		success: function(result){
+             $('#option2').html(result);
+          },
+          error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+          }
+	});
+	});
+	$('#option2').on('change',function(){
+
+		var church_address = $(this).val();
+		var dataSet = 'address='+church_address;
+		$.ajax({
+		type: 'POST',
+		url: 'address.php',
+		data: dataSet,
+		cache: false,
+		success: function(result){
+             $('#option1').html(result);
+          },
+          error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+          }
+	});
+	});
+
 })
 </script>
